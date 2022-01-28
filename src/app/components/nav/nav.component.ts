@@ -1,38 +1,52 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { LayoutView } from 'src/app/models/layout.model';
+import { LayoutActions } from 'src/app/state/actions';
+import * as fromReducer from '../../state/reducers';
 
 @Component({
   selector: 'app-nav',
   template: `
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Coffee Friends</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Ratings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Beans</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Methods</a>
-          </li>
-        </ul>
+    <nav class="navbar navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Offcanvas navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item" *ngFor="let view of [LayoutView.Ratings, LayoutView.Beans, LayoutView.Methods]">
+                <a class="nav-link" [class.active]="(currentLayoutView$ | async) === view"
+                aria-current="page" href="#" (click)="onViewChange(view)">{{LayoutView[view]}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
     </nav>
   `,
   styles: [
   ]
 })
 export class NavComponent implements OnInit {
-
-  constructor() { }
+  LayoutView = LayoutView;
+  currentLayoutView$!: Observable<LayoutView>;
+  constructor(
+    private store: Store,
+  ) { }
 
   ngOnInit(): void {
+    this.currentLayoutView$ = this.store.pipe(select(fromReducer.selectors.layout.getCurrentView));
+  }
+
+  onViewChange(view: LayoutView) {
+    this.store.dispatch(LayoutActions.change({view}));
   }
 
 }

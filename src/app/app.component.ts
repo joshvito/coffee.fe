@@ -1,12 +1,29 @@
 import { Component } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { LayoutView } from './models/layout.model';
+import * as fromReducer from './state/reducers';
 
 @Component({
   selector: 'app-root',
   template: `
     <app-nav></app-nav>
+    <main class="mt-5" [ngSwitch]="currentLayoutView$ | async">
+      <app-beans *ngSwitchCase="LayoutView.Beans"></app-beans>
+      <app-brew-methods *ngSwitchCase="LayoutView.Methods"></app-brew-methods>
+      <app-ratings *ngSwitchCase="LayoutView.Ratings"></app-ratings>
+    </main>
   `,
   styles: []
 })
 export class AppComponent {
-  title = 'coffee.fe';
+  LayoutView = LayoutView;
+  currentLayoutView$!: Observable<LayoutView>;
+  
+  constructor(
+    private store: Store,
+  ) {}
+  ngOnInit(){
+    this.currentLayoutView$ = this.store.pipe(select(fromReducer.selectors.layout.getCurrentView));
+  }
 }
