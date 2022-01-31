@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Observable, of } from 'rxjs';
@@ -13,7 +13,7 @@ export class CoffeeBeanService {
   constructor(private http: HttpClient) { }
 
   getMany(): Observable<IPageResult<ICoffeeBean>> {
-    return this.http.get<IPageResult<ICoffeeBean>>(`${environment.apiUrl}coffeebean`);
+    return this.http.get<IPageResult<ICoffeeBean>>(`${environment.apiUrl}beans`);
   }
 
 }

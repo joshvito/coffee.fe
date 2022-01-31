@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CoffeeBeanActions } from 'src/app/state/actions';
+import { State } from 'src/app/state/reducers';
 
 @Component({
   selector: 'app-beans',
@@ -12,9 +15,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BeansComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store: Store<State>,
+  ) { }
 
   ngOnInit(): void {
+    this.store.dispatch(CoffeeBeanActions.getMany());
   }
 
 }
