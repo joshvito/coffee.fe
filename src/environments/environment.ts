@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://ratebeans.today/api/',
+  apiUrl: 'https://ratebeans.today/api/',
 };
 
 /*
