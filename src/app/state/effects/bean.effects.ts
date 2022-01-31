@@ -4,6 +4,7 @@ import { of } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
 import { CoffeeBeanActions } from '../actions';
 import { CoffeeBeanService } from 'src/app/services/coffee-bean.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class BeanEffects {
@@ -13,7 +14,7 @@ export class BeanEffects {
     mergeMap(a => this.coffeeBeanService.getMany()
       .pipe(
         map(page => CoffeeBeanActions.getManySuccess({ page })),
-        catchError(err => of(CoffeeBeanActions.getManyFailure({errorMsg: err})))
+        catchError((err: HttpErrorResponse) => of(CoffeeBeanActions.getManyFailure({errorMsg: err.message})))
       )),
   ));
 
