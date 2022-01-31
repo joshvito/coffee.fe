@@ -30,7 +30,7 @@ import { State } from 'src/app/state/reducers';
 
       <div class="mb-3">
         <label for="notes" class="form-label">Notes</label>
-        <textarea id="notes" class="form-control" formControlName="notes" rows="4"
+        <textarea id="notes" class="form-control" formControlName="notes" rows="4" maxlength="255"
           [class.is-invalid]="form.get('notes')?.invalid && form.get('notes')?.touched"></textarea>
       </div>
 
@@ -53,7 +53,7 @@ export class RatingsComponent implements OnInit {
       'flavor': fb.control('', [Validators.required]),
       'aroma': fb.control('', [Validators.required]),
       'grams': fb.control('', [Validators.required]),
-      'notes': fb.control(''),
+      'notes': fb.control('', [Validators.max(255)]),
     });
   }
 
