@@ -8,7 +8,7 @@ import * as fromReducer from './state/reducers';
   selector: 'app-root',
   template: `
     <app-nav></app-nav>
-    <main class="mt-5" [ngSwitch]="currentLayoutView$ | async">
+    <main class="px-3 my-3" [ngSwitch]="currentLayoutView$ | async">
       <app-beans *ngSwitchCase="LayoutView.Beans"></app-beans>
       <app-brew-methods *ngSwitchCase="LayoutView.Methods"></app-brew-methods>
       <app-ratings *ngSwitchCase="LayoutView.Ratings"></app-ratings>
@@ -19,7 +19,7 @@ import * as fromReducer from './state/reducers';
 export class AppComponent {
   LayoutView = LayoutView;
   currentLayoutView$!: Observable<LayoutView>;
-  
+
   constructor(
     private store: Store,
   ) {}

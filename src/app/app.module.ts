@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { RatingsComponent } from './components/ratings/ratings.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,9 +20,10 @@ import { RatingsComponent } from './components/ratings/ratings.component';
     NavComponent,
     BrewMethodsComponent,
     BeansComponent,
-    RatingsComponent
+    RatingsComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     BrowserModule,
