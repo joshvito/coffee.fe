@@ -2,15 +2,21 @@ import { ActionReducer, ActionReducerMap, createFeatureSelector, createSelector,
 import { environment } from 'src/environments/environment';
 import * as fromLayout from './reducers/layout.reducer';
 import * as fromBeans from './reducers/bean.reducer';
+import * as fromRatings from './reducers/brew-rating.reducer';
+import * as fromMethods from './reducers/brew-method.reducer';
 
 export interface State {
     [fromLayout.key]: fromLayout.State;
     [fromBeans.key]: fromBeans.State;
+    [fromMethods.key]: fromMethods.State;
+    [fromRatings.key]: fromRatings.State;
 }
   
 export const reducers: ActionReducerMap<State> = {
     [fromLayout.key]: fromLayout.reducer,
     [fromBeans.key]: fromBeans.reducer,
+    [fromMethods.key]: fromMethods.reducer,
+    [fromRatings.key]: fromRatings.reducer,
 };
 
 
@@ -34,6 +40,8 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 
 const layoutFeatureState = createFeatureSelector<fromLayout.State>(fromLayout.key);
 const beanFeatureState = createFeatureSelector<fromBeans.State>(fromBeans.key);
+const ratingsFeatureState = createFeatureSelector<fromRatings.State>(fromRatings.key);
+const methodsFeatureState = createFeatureSelector<fromMethods.State>(fromMethods.key);
 
 const getCurrentView = createSelector(
     layoutFeatureState,
