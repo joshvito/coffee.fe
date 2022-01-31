@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { BrewMethodActions } from 'src/app/state/actions';
+import { State } from 'src/app/state/reducers';
 
 @Component({
   selector: 'app-brew-methods',
@@ -15,9 +18,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrewMethodsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store: Store<State>,
+  ) { }
 
   ngOnInit(): void {
+    this.store.dispatch(BrewMethodActions.getMany());
   }
 
 }
