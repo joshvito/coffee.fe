@@ -14,6 +14,8 @@ export const update = createAction('[BREW RATINGS] Update');
 export const updateSuccess = createAction('[BREW RATINGS] Update Success', props<{item: IBrewRatings}>());
 export const updateFailure = createAction('[BREW RATINGS] Update Fail',  props<{errorMsg: string}>());
 
+export const storeFilters = createAction('[Brew Ratings] Store Filters', props<{filters: IFilterBrewRatings}>());
+
 const all = union({
     getMany,
     getManySuccess,
@@ -24,6 +26,7 @@ const all = union({
     update,
     updateSuccess,
     updateFailure,
+    storeFilters
 });
 
 export type ActionsUnion = typeof all;
