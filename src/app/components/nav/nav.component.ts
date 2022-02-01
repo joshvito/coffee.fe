@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LayoutView } from 'src/app/models/layout.model';
@@ -48,5 +48,4 @@ export class NavComponent implements OnInit {
   onViewChange(view: LayoutView) {
     this.store.dispatch(LayoutActions.change({view}));
   }
-
 }
