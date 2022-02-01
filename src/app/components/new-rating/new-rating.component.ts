@@ -62,7 +62,7 @@ import { selectors, State } from 'src/app/state/reducers';
 
       <div class="d-grid gap-2">
         <button class="btn btn-primary" [disabled]="form.invalid">Save</button>
-        <button class="btn btn-outline-primary" (click)="onClose()">Close</button>
+        <button type="button" class="btn btn-outline-primary" (click)="onClose()">Close</button>
       </div>
     </form>
   `,

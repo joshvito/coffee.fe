@@ -9,10 +9,14 @@ import { Aroma, Flavor, IBrewRatings } from 'src/app/models/brew-ratings.model';
 import { BrewMethodActions, BrewRatingActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 import { NewRatingComponent } from '../new-rating/new-rating.component';
+import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
 
 @Component({
   selector: 'app-ratings',
   template: `
+    <div class="text-end mb-2">
+      <button type="button" class="btn btn-text" (click)="onToggleFilters()"><i class="fas fa-filter"></i></button>
+    </div>
     <p *ngIf="!(ratings$ | async)?.length">No Ratings</p>
     <div class="row gy-3">
       <div class="col-12" *ngFor="let r of (ratings$ | async)">
@@ -86,5 +90,9 @@ export class RatingsComponent implements OnInit {
 
   getMethod(id: number): Observable<IBrewMethod | undefined> {
     return this.store.select(selectors['brew-method'].getMethodById(id));
+  }
+
+  onToggleFilters(): void {
+    this.modalService.open(RatingFilterComponent);
   }
 }

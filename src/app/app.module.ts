@@ -16,6 +16,7 @@ import { NewRatingComponent } from './components/new-rating/new-rating.component
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { SentenceCasePipe } from './pipes/sentence-case.pipe';
+import { RatingFilterComponent } from './components/rating-filter/rating-filter.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SentenceCasePipe } from './pipes/sentence-case.pipe';
     NewRatingComponent,
     EnumToArrayPipe,
     SentenceCasePipe,
+    RatingFilterComponent,
   ],
   imports: [
     ReactiveFormsModule,
