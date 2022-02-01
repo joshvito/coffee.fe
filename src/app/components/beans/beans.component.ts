@@ -7,7 +7,7 @@ import { State } from 'src/app/state/reducers';
   selector: 'app-beans',
   template: `
     <p>
-      beans works!
+      beans works!!
     </p>
   `,
   styles: [
