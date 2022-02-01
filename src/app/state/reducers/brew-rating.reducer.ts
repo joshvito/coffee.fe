@@ -1,11 +1,13 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { IBrewRatings } from 'src/app/models/brew-ratings.model';
+import { IBrewRatings, IFilterBrewRatings } from 'src/app/models/brew-ratings.model';
 import { BrewRatingActions } from '../actions';
 
 export const key = 'brew-rating';
 
-export interface State extends EntityState<IBrewRatings> { };
+export interface State extends EntityState<IBrewRatings> {
+  filters: IFilterBrewRatings | null
+};
 
 export function sortByCreatedAt(a: IBrewRatings, b: IBrewRatings): number {
   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
@@ -16,7 +18,9 @@ export const adapter: EntityAdapter<IBrewRatings> = createEntityAdapter<IBrewRat
   sortComparer: sortByCreatedAt,
 });
 
-const initialState: State = adapter.getInitialState({});
+const initialState: State = adapter.getInitialState({
+  filters: null
+});
 
 export const reducer = createReducer(
   initialState,
@@ -34,4 +38,9 @@ export const reducer = createReducer(
     BrewRatingActions.createSuccess,
     (state, { item }) => adapter.upsertOne(item, state),
   ),
+
+  on(
+    BrewRatingActions.storeFilters,
+    (state, { filters }) => ({...state, filters}),
+  )
 );

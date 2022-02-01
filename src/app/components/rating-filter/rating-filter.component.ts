@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Observable, tap } from 'rxjs';
@@ -91,7 +91,8 @@ export class RatingFilterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const filters = this.form.value as Partial<IFilterBrewRatings>;
+    const filters = this.form.value;
+    this.store.dispatch(BrewRatingActions.storeFilters({filters}));
     this.store.dispatch(BrewRatingActions.getMany({filters}));
     this.activeModal.close();
   }
