@@ -37,8 +37,9 @@ import { NewRatingComponent } from '../new-rating/new-rating.component';
       </div>
     </div>
 
-    <div class="position-absolute bottom-0 end-0 h1 m-3">
-      <i class="fas fa-plus-circle" (click)="onAddRating()"></i>
+    <div class="position-fixed bottom-0 end-0 h1 m-3 rounded-circle align-items-center justify-content-center d-flex shadow-sm"
+      style="height: 55px; width: 55px; cursor: pointer">
+      <i class="fas fa-plus-circle d-block" (click)="onAddRating()"></i>
     </div>
   `,
   styles: [
