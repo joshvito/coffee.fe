@@ -7,3 +7,10 @@ export interface IBrewMethod extends ITimestamps {
     units: string;
     notes: string;
 }
+
+export interface ICreateBrewMethod {
+  type: string;
+  volume: number;
+  units: string;
+  notes: string;
+}

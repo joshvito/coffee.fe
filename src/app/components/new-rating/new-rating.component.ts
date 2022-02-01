@@ -79,7 +79,7 @@ export class NewRatingComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
-    private fb: FormBuilder,
+    fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
     this.form = fb.group({

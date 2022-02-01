@@ -1,12 +1,12 @@
 import { createAction, union, props } from '@ngrx/store';
-import { IBrewMethod } from 'src/app/models/brew-method.model';
+import { IBrewMethod, ICreateBrewMethod } from 'src/app/models/brew-method.model';
 import { IPageResult } from 'src/app/models/common.model';
 
 export const getMany = createAction('[BREW METHOD] Get Many');
 export const getManySuccess = createAction('[BREW METHOD] Get Many Success', props<{page: IPageResult<IBrewMethod>}>());
 export const getManyFailure = createAction('[BREW METHOD] Get Many Fail',  props<{errorMsg: string}>());
 
-export const create = createAction('[BREW METHOD] Create');
+export const create = createAction('[BREW METHOD] Create', props<{query: ICreateBrewMethod}>());
 export const createSuccess = createAction('[BREW METHOD] Create Success', props<{item: IBrewMethod}>());
 export const createFailure = createAction('[BREW METHOD] Create Fail',  props<{errorMsg: string}>());
 
