@@ -24,7 +24,7 @@ import { NewRatingComponent } from '../new-rating/new-rating.component';
               Grams: {{ r.grams }}g<br/>
             </p>
             <ng-container *ngIf="r.notes">
-              <p class="bg-light p-2">
+              <p class="bg-light p-2 rounded shadow-sm">
                 Notes:<br/>
                 {{ r.notes }}
               </p>
