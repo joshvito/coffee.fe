@@ -30,3 +30,8 @@ export interface ICreateBrewRating {
     grams: number;
     notes: string;
 }
+
+export interface IFilterBrewRatings {
+  methods: {[key: number]: boolean},
+  beans: {[key: number]: boolean},
+}

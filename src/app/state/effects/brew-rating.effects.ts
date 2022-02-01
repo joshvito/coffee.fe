@@ -11,7 +11,7 @@ export class BrewRatingEffects {
 
   search$ = createEffect(() => this.actions$.pipe(
     ofType(BrewRatingActions.getMany.type),
-    mergeMap(a => this.service.getMany()
+    mergeMap(a => this.service.getMany(a.filters)
       .pipe(
         map(page => BrewRatingActions.getManySuccess({ page })),
         catchError((err: HttpErrorResponse) => of(BrewRatingActions.getManyFailure({errorMsg: err.message})))

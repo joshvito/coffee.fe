@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { Observable, tap } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
+import { IFilterBrewRatings } from 'src/app/models/brew-ratings.model';
+import { BrewRatingActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 
 @Component({
@@ -89,7 +91,9 @@ export class RatingFilterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
+    const filters = this.form.value as Partial<IFilterBrewRatings>;
+    this.store.dispatch(BrewRatingActions.getMany({filters}));
+    this.activeModal.close();
   }
 
   onClose(): void {

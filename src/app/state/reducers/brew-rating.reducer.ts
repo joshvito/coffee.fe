@@ -22,7 +22,7 @@ export const reducer = createReducer(
   initialState,
   on(
     BrewRatingActions.getManySuccess,
-    (state, { page }) => adapter.upsertMany(page.data, state),
+    (state, { page }) => adapter.setAll(page.data, state),
   ),
 
   on(

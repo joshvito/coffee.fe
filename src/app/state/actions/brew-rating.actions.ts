@@ -1,8 +1,8 @@
 import { createAction, union, props } from '@ngrx/store';
-import { IBrewRatings, ICreateBrewRating } from 'src/app/models/brew-ratings.model';
+import { IBrewRatings, ICreateBrewRating, IFilterBrewRatings } from 'src/app/models/brew-ratings.model';
 import { IPageResult } from 'src/app/models/common.model';
 
-export const getMany = createAction('[BREW RATINGS] Get Many');
+export const getMany = createAction('[BREW RATINGS] Get Many', props<{filters?: Partial<IFilterBrewRatings>}>());
 export const getManySuccess = createAction('[BREW RATINGS] Get Many Success', props<{page: IPageResult<IBrewRatings>}>());
 export const getManyFailure = createAction('[BREW RATINGS] Get Many Fail',  props<{errorMsg: string}>());
 

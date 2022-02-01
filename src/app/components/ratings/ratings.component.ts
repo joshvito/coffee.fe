@@ -67,7 +67,7 @@ export class RatingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(BrewRatingActions.getMany());
+    this.store.dispatch(BrewRatingActions.getMany({}));
     this.store.dispatch(BrewMethodActions.getMany());
     this.store.dispatch(CoffeeBeanActions.getMany());
   }
