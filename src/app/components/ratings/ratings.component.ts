@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IBrewRatings } from 'src/app/models/brew-ratings.model';
+import { Aroma, Flavor, IBrewRatings } from 'src/app/models/brew-ratings.model';
 import { BrewRatingActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 import { NewRatingComponent } from '../new-rating/new-rating.component';
@@ -17,8 +17,8 @@ import { NewRatingComponent } from '../new-rating/new-rating.component';
         <p class="card-text">
           Coffee: {{ r.bean_id }}<br/>
           Method: {{ r.method_id }}<br/>
-          Flavor: {{ r.flavor }}<br/>
-          Aroma: {{ r.aroma }}<br/>
+          Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
+          Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
           Grams: {{ r.grams }}g<br/>
         </p>
         <ng-container *ngIf="r.notes">
@@ -39,6 +39,8 @@ import { NewRatingComponent } from '../new-rating/new-rating.component';
 })
 export class RatingsComponent implements OnInit {
   ratings$: Observable<IBrewRatings[]>;
+  Aroma = Aroma;
+  Flavor = Flavor;
 
   constructor(
     private store: Store<State>,
