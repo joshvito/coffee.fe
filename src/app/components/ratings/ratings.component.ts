@@ -11,22 +11,26 @@ import { NewRatingComponent } from '../new-rating/new-rating.component';
   selector: 'app-ratings',
   template: `
     <p *ngIf="!(ratings$ | async)?.length">No Ratings</p>
-    <div class="card" *ngFor="let r of (ratings$ | async)">
-      <div class="card-body">
-        <p class="card-title">{{ r.created_at | date:"short" }}</p>
-        <p class="card-text">
-          Coffee: {{ r.bean_id }}<br/>
-          Method: {{ r.method_id }}<br/>
-          Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
-          Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
-          Grams: {{ r.grams }}g<br/>
-        </p>
-        <ng-container *ngIf="r.notes">
-          <p>
-            Notes:<br/>
-            {{ r.notes }}
-          </p>
-        </ng-container>
+    <div class="row gy-3">
+      <div class="col-12" *ngFor="let r of (ratings$ | async)">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title">{{ r.created_at | date:"short" }}</p>
+            <p class="card-text">
+              Coffee: {{ r.bean_id }}<br/>
+              Method: {{ r.method_id }}<br/>
+              Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
+              Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
+              Grams: {{ r.grams }}g<br/>
+            </p>
+            <ng-container *ngIf="r.notes">
+              <p>
+                Notes:<br/>
+                {{ r.notes }}
+              </p>
+            </ng-container>
+          </div>
+        </div>
       </div>
     </div>
 
