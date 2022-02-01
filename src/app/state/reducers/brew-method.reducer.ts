@@ -9,7 +9,18 @@ export interface State extends EntityState<IBrewMethod>{};
 
 export const adapter: EntityAdapter<IBrewMethod> = createEntityAdapter<IBrewMethod>({
     selectId: (ad: IBrewMethod) => ad.id,
-    sortComparer: false,
+    sortComparer: (a,b) => {
+      const typeA = a.type.toUpperCase();
+      const typeB = b.type.toUpperCase();
+
+      if (typeA < typeB) {
+        return -1;
+      }
+      if (typeA > typeB) {
+        return 1;
+      }
+      return 0;
+    },
   });
 
 const initialState: State = adapter.getInitialState({});

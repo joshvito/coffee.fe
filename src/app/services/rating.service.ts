@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
-import { IBrewRatings } from '../models/brew-ratings.model';
+import { IBrewRatings, ICreateBrewRating } from '../models/brew-ratings.model';
 import { IPageResult } from '../models/common.model';
 
 @Injectable({
@@ -14,6 +14,10 @@ export class RatingService {
 
   getMany(): Observable<IPageResult<IBrewRatings>> {
     return this.http.get<IPageResult<IBrewRatings>>(`${environment.apiUrl}ratings`);
+  }
+
+  create(params: ICreateBrewRating): Observable<IBrewRatings> {
+    return this.http.post<IBrewRatings>(`${environment.apiUrl}ratings`, params);
   }
 
 }

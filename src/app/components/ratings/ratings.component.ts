@@ -1,64 +1,61 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IBrewRatings } from 'src/app/models/brew-ratings.model';
 import { BrewRatingActions } from 'src/app/state/actions';
-import { State } from 'src/app/state/reducers';
+import { selectors, State } from 'src/app/state/reducers';
+import { NewRatingComponent } from '../new-rating/new-rating.component';
 
 @Component({
   selector: 'app-ratings',
   template: `
-    <form [formGroup]="form">
-      <div class="mb-3">
-        <label for="flavor" class="form-label">Flavor</label>
-        <select id="flavor" class="form-control" formControlName="flavor"
-          [class.is-invalid]="form.get('flavor')?.invalid && form.get('flavor')?.touched">
-        </select>
+    <p *ngIf="!(ratings$ | async)?.length">No Ratings</p>
+    <div class="card" *ngFor="let r of (ratings$ | async)">
+      <div class="card-body">
+        <p class="card-title">{{ r.created_at | date:"short" }}</p>
+        <p class="card-text">
+          Coffee: {{ r.bean_id }}<br/>
+          Method: {{ r.method_id }}<br/>
+          Flavor: {{ r.flavor }}<br/>
+          Aroma: {{ r.aroma }}<br/>
+          Grams: {{ r.grams }}g<br/>
+        </p>
+        <ng-container *ngIf="r.notes">
+          <p>
+            Notes:<br/>
+            {{ r.notes }}
+          </p>
+        </ng-container>
       </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="aroma" class="form-label">Aroma</label>
-        <select id="aroma" class="form-control" formControlName="aroma"
-          [class.is-invalid]="form.get('aroma')?.invalid && form.get('aroma')?.touched">
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label for="grams" class="form-label">Grams</label>
-        <input type="number" id="grams" class="form-control" formControlName="grams"
-          [class.is-invalid]="form.get('grams')?.invalid && form.get('grams')?.touched" />
-      </div>
-
-      <div class="mb-3">
-        <label for="notes" class="form-label">Notes</label>
-        <textarea id="notes" class="form-control" formControlName="notes" rows="4" maxlength="255"
-          [class.is-invalid]="form.get('notes')?.invalid && form.get('notes')?.touched"></textarea>
-      </div>
-
-      <div class="d-grid">
-        <button class="btn btn-primary" [disabled]="form.invalid">Save</button>
-      </div>
-    </form>
+    <div class="position-absolute bottom-0 end-0 h1 m-3">
+      <i class="fas fa-plus-circle" (click)="onAddRating()"></i>
+    </div>
   `,
   styles: [
   ]
 })
 export class RatingsComponent implements OnInit {
-  form: FormGroup;
+  ratings$: Observable<IBrewRatings[]>;
 
   constructor(
     private store: Store<State>,
-    private fb: FormBuilder
+    private modalService: NgbModal
   ) {
-    this.form = fb.group({
-      'flavor': fb.control('', [Validators.required]),
-      'aroma': fb.control('', [Validators.required]),
-      'grams': fb.control('', [Validators.required]),
-      'notes': fb.control('', [Validators.max(255)]),
-    });
+    this.ratings$ = this.store.select(selectors['brew-rating'].getAllRatings);
   }
 
   ngOnInit(): void {
     this.store.dispatch(BrewRatingActions.getMany());
   }
 
+  onAddRating(): void {
+    this.modalService.open(NewRatingComponent).result.then((result) => {
+      this.store.dispatch(BrewRatingActions.create({rating: result}));
+    }, (reason) => {
+      console.log('dismissed');
+    });
+  }
 }

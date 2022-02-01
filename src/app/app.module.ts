@@ -12,7 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { RatingsComponent } from './components/ratings/ratings.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NewRatingComponent } from './components/new-rating/new-rating.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
+import { SentenceCasePipe } from './pipes/sentence-case.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrewMethodsComponent,
     BeansComponent,
     RatingsComponent,
+    NewRatingComponent,
+    EnumToArrayPipe,
+    SentenceCasePipe,
   ],
   imports: [
     ReactiveFormsModule,
@@ -28,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserModule,
     StoreModule.forRoot(fromRoot.reducers, {metaReducers: fromRoot.metaReducers}),
-    EffectsModule.forRoot([...effects])
+    EffectsModule.forRoot([...effects]),
+    NgbModule
   ],
   providers: [
   ],

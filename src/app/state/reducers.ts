@@ -6,37 +6,36 @@ import * as fromRatings from './reducers/brew-rating.reducer';
 import * as fromMethods from './reducers/brew-method.reducer';
 
 export interface State {
-    [fromLayout.key]: fromLayout.State;
-    [fromBeans.key]: fromBeans.State;
-    [fromMethods.key]: fromMethods.State;
-    [fromRatings.key]: fromRatings.State;
+  [fromLayout.key]: fromLayout.State;
+  [fromBeans.key]: fromBeans.State;
+  [fromMethods.key]: fromMethods.State;
+  [fromRatings.key]: fromRatings.State;
 }
-  
-export const reducers: ActionReducerMap<State> = {
-    [fromLayout.key]: fromLayout.reducer,
-    [fromBeans.key]: fromBeans.reducer,
-    [fromMethods.key]: fromMethods.reducer,
-    [fromRatings.key]: fromRatings.reducer,
-};
 
+export const reducers: ActionReducerMap<State> = {
+  [fromLayout.key]: fromLayout.reducer,
+  [fromBeans.key]: fromBeans.reducer,
+  [fromMethods.key]: fromMethods.reducer,
+  [fromRatings.key]: fromRatings.reducer,
+};
 
 // console.log all actions in dev mode
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
-    return (state, action) => {
-      const result = reducer(state, action);
-      console.groupCollapsed(action.type);
-      console.log('prev state', state);
-      console.log('action', action);
-      console.log('next state', result);
-      console.groupEnd();
-  
-      return result;
-    };
-  }
-  
+  return (state, action) => {
+    const result = reducer(state, action);
+    console.groupCollapsed(action.type);
+    console.log('prev state', state);
+    console.log('action', action);
+    console.log('next state', result);
+    console.groupEnd();
+
+    return result;
+  };
+}
+
 export const metaReducers: MetaReducer<State>[] = !environment.production
-? [logger]
-: [];
+  ? [logger]
+  : [];
 
 const layoutFeatureState = createFeatureSelector<fromLayout.State>(fromLayout.key);
 const beanFeatureState = createFeatureSelector<fromBeans.State>(fromBeans.key);
@@ -44,11 +43,51 @@ const ratingsFeatureState = createFeatureSelector<fromRatings.State>(fromRatings
 const methodsFeatureState = createFeatureSelector<fromMethods.State>(fromMethods.key);
 
 const getCurrentView = createSelector(
-    layoutFeatureState,
-    fromLayout.getCurrentView
+  layoutFeatureState,
+  fromLayout.getCurrentView
 )
+
+const {
+  selectIds: getRatingIds,
+  selectEntities: getRatingEntities,
+  selectAll: getAllRatings,
+  selectTotal: getTotalRatings
+} = fromRatings.adapter.getSelectors(ratingsFeatureState);
+
+const {
+  selectIds: getMethodIds,
+  selectEntities: getMethodEntities,
+  selectAll: getAllMethods,
+  selectTotal: getTotalMethods
+} = fromMethods.adapter.getSelectors(methodsFeatureState);
+
+const {
+  selectIds: getBeanIds,
+  selectEntities: getBeanEntities,
+  selectAll: getAllBeans,
+  selectTotal: getTotalBeans
+} = fromBeans.adapter.getSelectors(beanFeatureState);
+
 export const selectors = {
-    [fromLayout.key]: {
-        getCurrentView,
-    }
+  [fromLayout.key]: {
+    getCurrentView,
+  },
+  [fromRatings.key]: {
+    getRatingIds,
+    getRatingEntities,
+    getAllRatings,
+    getTotalRatings
+  },
+  [fromMethods.key]: {
+    getMethodIds,
+    getMethodEntities,
+    getAllMethods,
+    getTotalMethods
+  },
+  [fromBeans.key]: {
+    getBeanIds,
+    getBeanEntities,
+    getAllBeans,
+    getTotalBeans
+  }
 }

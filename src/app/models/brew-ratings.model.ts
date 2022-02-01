@@ -10,7 +10,7 @@ export enum Aroma {
     None,
     Pleasant,
     Overkill,
-} 
+}
 
 export interface IBrewRatings extends ITimestamps {
     id: number;
@@ -18,5 +18,15 @@ export interface IBrewRatings extends ITimestamps {
     method_id: number;
     flavor: Flavor;
     aroma: Aroma;
+    grams: number;
+    notes: string;
+}
+
+export interface ICreateBrewRating {
+    bean_id: number;
+    method_id: number;
+    flavor: Flavor;
+    aroma: Aroma;
+    grams: number;
     notes: string;
 }
