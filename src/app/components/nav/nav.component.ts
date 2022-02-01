@@ -10,7 +10,7 @@ import * as fromReducer from '../../state/reducers';
   template: `
     <nav class="navbar navbar-light bg-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Coffee Friends</a>
+        <a class="navbar-brand" href="#"><i class="fas fa-coffee"></i> Coffee Friends</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
