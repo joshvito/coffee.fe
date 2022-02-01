@@ -9,7 +9,7 @@ export interface State {
 };
 
 const initialState: State = {
-  currentView: LayoutView.Ratings,     
+  currentView: LayoutView.Ratings,
 };
 
 export const reducer = createReducer(

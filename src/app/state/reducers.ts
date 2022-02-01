@@ -82,12 +82,24 @@ export const selectors = {
     getMethodIds,
     getMethodEntities,
     getAllMethods,
-    getTotalMethods
+    getTotalMethods,
+    getMethodById: (id: number) => {
+      return createSelector(
+        getMethodEntities,
+        (e) => e[id]
+      );
+    }
   },
   [fromBeans.key]: {
     getBeanIds,
     getBeanEntities,
     getAllBeans,
-    getTotalBeans
+    getTotalBeans,
+    getBeanById: (id: number) => {
+      return createSelector(
+        getBeanEntities,
+        (e) => e[id]
+      );
+    }
   }
 }
