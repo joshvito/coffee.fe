@@ -1,11 +1,7 @@
 import { ITimestamps } from './common.model';
 
-export interface IBrewMethod extends ITimestamps {
+export interface IBrewMethod extends ITimestamps, ICreateBrewMethod {
     id: number;
-    type: string;
-    volume: number;
-    units: string;
-    notes: string;
 }
 
 export interface ICreateBrewMethod {

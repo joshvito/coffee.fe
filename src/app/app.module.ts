@@ -18,6 +18,7 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { SentenceCasePipe } from './pipes/sentence-case.pipe';
 import { RatingFilterComponent } from './components/rating-filter/rating-filter.component';
 import { NewMethodComponent } from './components/brew-methods/new-method.component';
+import { NewBeanComponent } from './components/beans/new-bean.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NewMethodComponent } from './components/brew-methods/new-method.compone
     SentenceCasePipe,
     RatingFilterComponent,
     NewMethodComponent,
+    NewBeanComponent,
   ],
   imports: [
     ReactiveFormsModule,

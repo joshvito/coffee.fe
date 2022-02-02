@@ -11,15 +11,24 @@ export class BeanEffects {
 
   search$ = createEffect(() => this.actions$.pipe(
     ofType(CoffeeBeanActions.getMany.type),
-    mergeMap(a => this.coffeeBeanService.getMany()
+    mergeMap(a => this.service.getMany()
       .pipe(
         map(page => CoffeeBeanActions.getManySuccess({ page })),
         catchError((err: HttpErrorResponse) => of(CoffeeBeanActions.getManyFailure({errorMsg: err.message})))
       )),
   ));
 
+  create$ = createEffect(() => this.actions$.pipe(
+    ofType(CoffeeBeanActions.create.type),
+    mergeMap(a => this.service.create(a.query)
+      .pipe(
+        map(item => CoffeeBeanActions.createSuccess({item})),
+        catchError((err: HttpErrorResponse) => of(CoffeeBeanActions.createFailure({errorMsg: err.message})))
+      )),
+  ));
+
   constructor(
     private actions$: Actions<CoffeeBeanActions.ActionsUnion>,
-    private coffeeBeanService: CoffeeBeanService,
+    private service: CoffeeBeanService,
   ) {}
 }

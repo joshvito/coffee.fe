@@ -12,14 +12,8 @@ export enum Aroma {
     Overkill,
 }
 
-export interface IBrewRatings extends ITimestamps {
+export interface IBrewRatings extends ITimestamps, ICreateBrewRating {
     id: number;
-    bean_id: number;
-    method_id: number;
-    flavor: Flavor;
-    aroma: Aroma;
-    grams: number;
-    notes: string;
 }
 
 export interface ICreateBrewRating {

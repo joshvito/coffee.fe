@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
-import { ICoffeeBean } from '../models/bean.model';
+import { ICoffeeBean, ICreateBean } from '../models/bean.model';
 import { IPageResult } from '../models/common.model';
 
 @Injectable({
@@ -16,4 +16,7 @@ export class CoffeeBeanService {
     return this.http.get<IPageResult<ICoffeeBean>>(`${environment.apiUrl}beans`);
   }
 
+  create(params: ICreateBean): Observable<ICoffeeBean> {
+    return this.http.post<ICoffeeBean>(`${environment.apiUrl}beans`, params);
+  }
 }

@@ -4,10 +4,13 @@ export enum Roast {
     Light, Medium, Dark
 }
 
-export interface ICoffeeBean extends ITimestamps {
+export interface ICoffeeBean extends ITimestamps, ICreateBean {
     id: number;
-    brand: string;
-    origin: string;
-    roast: Roast;
-    notes: string;
+}
+
+export interface ICreateBean {
+  brand: string;
+  origin: string;
+  roast: Roast;
+  notes: string;
 }
