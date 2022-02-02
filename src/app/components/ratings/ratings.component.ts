@@ -28,7 +28,7 @@ import { RatingFilterComponent } from '../rating-filter/rating-filter.component'
               Method: {{ (getMethod(r.method_id) | async)?.type }}<br/>
               Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
               Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
-              Grams: {{ r.grams }}g <span *ngIf="r?.grind">({{r.grind}})</span><br/>
+              Grams: {{ r.grams }}g <span *ngIf="r?.grind">({{r.grind ? Grind[r.grind] : ''}})</span>
             </p>
             <ng-container *ngIf="r.notes">
               <p class="bg-light p-2 rounded shadow-sm">
