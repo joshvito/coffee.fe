@@ -68,6 +68,8 @@ const {
   selectTotal: getTotalBeans
 } = fromBeans.adapter.getSelectors(beanFeatureState);
 
+const getFilters = createSelector(ratingsFeatureState, (s) => s.filters);
+
 export const selectors = {
   [fromLayout.key]: {
     getCurrentView,
@@ -76,7 +78,8 @@ export const selectors = {
     getRatingIds,
     getRatingEntities,
     getAllRatings,
-    getTotalRatings
+    getTotalRatings,
+    getFilters
   },
   [fromMethods.key]: {
     getMethodIds,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { Observable, tap } from 'rxjs';
+import { combineLatest, Observable, tap } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
 import { BrewRatingActions } from 'src/app/state/actions';
@@ -62,19 +62,16 @@ export class RatingFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.beans$.pipe(
-      tap(b => {
+    combineLatest(
+      [this.beans$, this.methods$, this.store.select(selectors['brew-rating'].getFilters)]
+    ).pipe(
+      tap(([b, m, f]) => {
         b.reduce((a, v) => {
-          a.addControl(v.id.toString(), this.fb.control(false))
+          a.addControl(v.id.toString(), this.fb.control(f?.beans[v.id]))
           return a;
         }, this.beans);
-      })
-    ).subscribe();
-
-    this.methods$.pipe(
-      tap(m => {
         m.reduce((a, v) => {
-          a.addControl(v.id.toString(), this.fb.control(false))
+          a.addControl(v.id.toString(), this.fb.control(f?.methods[v.id]))
           return a;
         }, this.methods);
       })
