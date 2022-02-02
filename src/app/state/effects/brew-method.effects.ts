@@ -18,6 +18,15 @@ export class BrewMethodEffects {
       )),
   ));
 
+  create$ = createEffect(() => this.actions$.pipe(
+    ofType(BrewMethodActions.create.type),
+    mergeMap(a => this.service.create(a.query)
+      .pipe(
+        map(item => BrewMethodActions.createSuccess({item})),
+        catchError((err: HttpErrorResponse) => of(BrewMethodActions.createFailure({errorMsg: err.message})))
+      )),
+  ));
+
   constructor(
     private actions$: Actions<BrewMethodActions.ActionsUnion>,
     private service: BrewMethodService,
