@@ -1,7 +1,7 @@
 import { ITimestamps } from './common.model';
 
 export enum Roast {
-    Light, Medium, Dark
+  Light, Medium, Dark
 }
 
 export interface ICoffeeBean extends ITimestamps, ICreateBean {

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Aroma, Flavor } from 'src/app/models/brew-ratings.model';
+import { Aroma, Flavor, Grind } from 'src/app/models/brew-ratings.model';
 import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 
@@ -55,6 +55,15 @@ import { selectors, State } from 'src/app/state/reducers';
       </div>
 
       <div class="mb-3">
+        <label for="grind" class="form-label">Grind</label>
+        <select id="grind" class="form-control" formControlName="grind"
+          [class.is-invalid]="form.get('grind')?.invalid && form.get('grind')?.touched">
+          <option></option>
+          <option *ngFor="let kvp of (Grind | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
         <label for="notes" class="form-label">Notes</label>
         <textarea id="notes" class="form-control" formControlName="notes" rows="4" maxlength="255"
           [class.is-invalid]="form.get('notes')?.invalid && form.get('notes')?.touched"></textarea>
@@ -74,6 +83,7 @@ export class NewRatingComponent implements OnInit {
   Aroma = Aroma;
   Flavor = Flavor;
   Roast = Roast;
+  Grind = Grind;
   methods$: Observable<IBrewMethod[]>;
   beans$: Observable<ICoffeeBean[]>;
 
@@ -88,6 +98,7 @@ export class NewRatingComponent implements OnInit {
       'flavor': fb.control(null, [Validators.required]),
       'aroma': fb.control(null, [Validators.required]),
       'grams': fb.control(null, [Validators.required]),
+      'grind': fb.control(null),
       'notes': fb.control('', [Validators.max(255)]),
     });
     this.methods$ = this.store.select(selectors['brew-method'].getAllMethods);

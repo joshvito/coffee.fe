@@ -12,6 +12,10 @@ export enum Aroma {
     Overkill,
 }
 
+export enum Grind {
+  Fine, MediumFine, Medium, MediumCoarse, Coarse
+}
+
 export interface IBrewRatings extends ITimestamps, ICreateBrewRating {
     id: number;
 }
@@ -22,6 +26,7 @@ export interface ICreateBrewRating {
     flavor: Flavor;
     aroma: Aroma;
     grams: number;
+    grind?: Grind;
     notes: string;
 }
 

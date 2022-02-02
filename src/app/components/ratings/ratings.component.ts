@@ -5,10 +5,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Aroma, Flavor, IBrewRatings } from 'src/app/models/brew-ratings.model';
+import { Aroma, Flavor, Grind, IBrewRatings } from 'src/app/models/brew-ratings.model';
 import { BrewMethodActions, BrewRatingActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
-import { NewRatingComponent } from '../new-rating/new-rating.component';
+import { NewRatingComponent } from './new-rating.component';
 import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
 
 @Component({
@@ -28,7 +28,7 @@ import { RatingFilterComponent } from '../rating-filter/rating-filter.component'
               Method: {{ (getMethod(r.method_id) | async)?.type }}<br/>
               Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
               Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
-              Grams: {{ r.grams }}g<br/>
+              Grams: {{ r.grams }}g <span *ngIf="r?.grind">({{r.grind}})</span><br/>
             </p>
             <ng-container *ngIf="r.notes">
               <p class="bg-light p-2 rounded shadow-sm">
@@ -54,6 +54,7 @@ export class RatingsComponent implements OnInit {
   Aroma = Aroma;
   Flavor = Flavor;
   Roast = Roast;
+  Grind = Grind;
   methods$: Observable<Dictionary<IBrewMethod>>;
   beans$: Observable<Dictionary<ICoffeeBean>>;
 
