@@ -15,7 +15,7 @@ import { Roast } from 'src/app/models/bean.model';
 
       <div class="mb-3">
         <label for="origin" class="form-label">Origin</label>
-        <input type="number" id="origin" class="form-control" formControlName="origin"
+        <input type="text" id="origin" class="form-control" formControlName="origin"
           [class.is-invalid]="form.get('origin')?.invalid && form.get('origin')?.touched" />
       </div>
 
