@@ -6,7 +6,7 @@ import { BrewMethodsComponent } from './components/brew-methods/brew-methods.com
 import { BeansComponent } from './components/beans/beans.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromRoot from './state/reducers';
-import {effects} from './state/effects';
+import { effects } from './state/effects';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
