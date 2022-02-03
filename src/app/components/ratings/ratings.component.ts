@@ -28,7 +28,7 @@ import { RatingFilterComponent } from '../rating-filter/rating-filter.component'
         <div class="card">
           <div class="card-body">
             <div class="card-title mb-0">
-              <a type="button" class="btn btn-link link-dark p-0 text-decoration-none text-start" data-bs-toggle="collapse" href="#collapse-{{i}}">
+              <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
                 {{ r.created_at | date:"MMM d, y" }} <br/>
                 {{ (getBean(r.bean_id) | async)?.origin }} ({{ getRoast((getBean(r.bean_id) | async)?.roast) }} Roast)
               </a>
