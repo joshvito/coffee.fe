@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromRoot from './state/reducers';
 import { effects } from './state/effects';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { RatingsComponent } from './components/ratings/ratings.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { SentenceCasePipe } from './pipes/sentence-case.pipe';
 import { RatingFilterComponent } from './components/rating-filter/rating-filter.component';
 import { NewMethodComponent } from './components/brew-methods/new-method.component';
 import { NewBeanComponent } from './components/beans/new-bean.component';
+import { ErrorInterceptor } from './interceptors/error.interceptors';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { NewBeanComponent } from './components/beans/new-bean.component';
     NgbModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
