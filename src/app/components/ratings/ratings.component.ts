@@ -5,37 +5,49 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Aroma, Flavor, IBrewRatings } from 'src/app/models/brew-ratings.model';
+import { Aroma, Flavor, Grind, IBrewRatings } from 'src/app/models/brew-ratings.model';
 import { BrewMethodActions, BrewRatingActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
-import { NewRatingComponent } from '../new-rating/new-rating.component';
+import { NewRatingComponent } from './new-rating.component';
 import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
 
 @Component({
   selector: 'app-ratings',
   template: `
-    <div class="text-end mb-2">
-      <button type="button" class="btn btn-text" (click)="onToggleFilters()"><i class="fas fa-filter"></i></button>
+    <div class="mb-2 d-flex align-items-center">
+      <h1 class="h3">Ratings</h1>
+      <div class="text-end flex-grow-1">
+        <button type="button" class="btn btn-text" (click)="onToggleFilters()"><i class="fas fa-filter"></i></button>
+      </div>
     </div>
+
     <p *ngIf="!(ratings$ | async)?.length">No Ratings</p>
+
     <div class="row gy-3">
-      <div class="col-12" *ngFor="let r of (ratings$ | async)">
+      <div class="col-12" *ngFor="let r of (ratings$ | async); let i = index">
         <div class="card">
           <div class="card-body">
-            <p class="card-title">{{ r.created_at | date:"short" }}</p>
-            <p class="card-text">
-              Coffee: {{ (getBean(r.bean_id) | async)?.origin }} ({{ getRoast((getBean(r.bean_id) | async)?.roast) }} Roast)<br/>
-              Method: {{ (getMethod(r.method_id) | async)?.type }}<br/>
-              Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
-              Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
-              Grams: {{ r.grams }}g<br/>
-            </p>
-            <ng-container *ngIf="r.notes">
-              <p class="bg-light p-2 rounded shadow-sm">
-                Notes:<br/>
-                {{ r.notes }}
+            <div class="card-title mb-0">
+              <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
+                {{ r.created_at | date:"MMM d, y" }} <br/>
+                {{ (getBean(r.bean_id) | async)?.origin }} ({{ getRoast((getBean(r.bean_id) | async)?.roast) }} Roast)
+              </a>
+            </div>
+
+            <div class="collapse mt-3" id="collapse-{{i}}">
+              <p class="card-text">
+                Method: {{ (getMethod(r.method_id) | async)?.type }}<br/>
+                Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
+                Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
+                Grams: {{ r.grams }}g <span *ngIf="r?.grind !== null">({{r.grind !== undefined && r.grind > -1 !== null ? Grind[r.grind] : 'Unknown'}})</span>
               </p>
-            </ng-container>
+              <ng-container *ngIf="r.notes">
+                <p class="bg-light p-2 mb-0 rounded shadow-sm">
+                  Notes:<br/>
+                  {{ r.notes }}
+                </p>
+              </ng-container>
+            </div>
           </div>
         </div>
       </div>
@@ -54,6 +66,7 @@ export class RatingsComponent implements OnInit {
   Aroma = Aroma;
   Flavor = Flavor;
   Roast = Roast;
+  Grind = Grind;
   methods$: Observable<Dictionary<IBrewMethod>>;
   beans$: Observable<Dictionary<ICoffeeBean>>;
 
