@@ -15,12 +15,12 @@ export class ColorizerService {
   private calculatorize(rating: IBrewRatings): number {
     return 0 + rating.aroma + rating.flavor;
   }
-
+// yellow
   private colorize(score: number): string {
-    if (score >= 4) return '#198754';
-    if (score > 2 ) return '#20c997';
-    if (score === 2 ) return '#ffc107';
-    if (score > 0) return '#fd7e14';
-    return '#dc3545';
+    if (score >= 4) return '#d63384' //red;
+    if (score > 2 ) return '#ffc107' //yellow;
+    if (score === 2 ) return '#20c997' //green;
+    if (score > 0) return '#ffc107';
+    return '#d63384';
   }
 }
