@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
 import { Aroma, Flavor, Grind, IBrewRatings } from 'src/app/models/brew-ratings.model';
@@ -10,6 +10,8 @@ import { BrewMethodActions, BrewRatingActions, CoffeeBeanActions } from 'src/app
 import { selectors, State } from 'src/app/state/reducers';
 import { NewRatingComponent } from './new-rating.component';
 import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
+import { ColorizerService } from 'src/app/services/colorizer.service';
+import { IStringStringMap } from 'src/app/models/common.model';
 
 @Component({
   selector: 'app-ratings',
@@ -28,6 +30,10 @@ import { RatingFilterComponent } from '../rating-filter/rating-filter.component'
         <div class="card">
           <div class="card-body">
             <div class="card-title mb-0">
+              <span [ngStyle]="{'background-color': getColor(r), '--bs-bg-opacity': 1}"
+                class="position-absolute top-50 end-0 translate-middle p-2 border border-light rounded-circle">
+                <span class="visually-hidden">color dot</span>
+              </span>
               <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
                 {{ r.created_at | date:"MMM d, y" }} <br/>
                 {{ (getBean(r.bean_id) | async)?.origin }} ({{ getRoast((getBean(r.bean_id) | async)?.roast) }} Roast)
@@ -72,7 +78,8 @@ export class RatingsComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private colorizer: ColorizerService,
   ) {
     this.ratings$ = this.store.select(selectors['brew-rating'].getAllRatings);
     this.methods$ = this.store.select(selectors['brew-method'].getMethodEntities);
@@ -91,6 +98,10 @@ export class RatingsComponent implements OnInit {
     }, (reason) => {
       console.log('dismissed');
     });
+  }
+
+  getColor(rating: IBrewRatings): string {
+    return this.colorizer.color(rating);
   }
 
   getBean(id: number): Observable<ICoffeeBean | undefined> {
