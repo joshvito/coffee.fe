@@ -6,8 +6,8 @@ import { UserEffects } from './effects/user.effects';
 
 export const effects = [
   InitEffects,
+  UserEffects,
   BeanEffects,
   BrewMethodEffects,
   BrewRatingEffects,
-  UserEffects
 ];
