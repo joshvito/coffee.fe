@@ -19,7 +19,7 @@ import { SentenceCasePipe } from './pipes/sentence-case.pipe';
 import { RatingFilterComponent } from './components/rating-filter/rating-filter.component';
 import { NewMethodComponent } from './components/brew-methods/new-method.component';
 import { NewBeanComponent } from './components/beans/new-bean.component';
-import { ErrorInterceptor } from './interceptors/error.interceptors';
+import { httpInterceptorProviders } from './interceptors';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptors';
     NgbModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://ratebeans.today/api/',
+  apiUrl: '//localhost:8000/',
 };
 
 /*
