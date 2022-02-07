@@ -18,6 +18,7 @@ export enum Grind {
 
 export interface IBrewRatings extends ITimestamps, ICreateBrewRating {
     id: number;
+    user_id: number;
 }
 
 export interface ICreateBrewRating {

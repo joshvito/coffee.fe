@@ -1,0 +1,12 @@
+.rating {
+
+  &__controls {
+    background-color: #fff;
+    display: none;
+    z-index: 1;
+  }
+
+  &:hover &__controls {
+    display: block;
+  }
+}

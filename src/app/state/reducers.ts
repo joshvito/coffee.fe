@@ -4,12 +4,14 @@ import * as fromLayout from './reducers/layout.reducer';
 import * as fromBeans from './reducers/bean.reducer';
 import * as fromRatings from './reducers/brew-rating.reducer';
 import * as fromMethods from './reducers/brew-method.reducer';
+import * as fromUsers from './reducers/user.reducer';
 
 export interface State {
   [fromLayout.key]: fromLayout.State;
   [fromBeans.key]: fromBeans.State;
   [fromMethods.key]: fromMethods.State;
   [fromRatings.key]: fromRatings.State;
+  [fromUsers.key]: fromUsers.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -17,6 +19,7 @@ export const reducers: ActionReducerMap<State> = {
   [fromBeans.key]: fromBeans.reducer,
   [fromMethods.key]: fromMethods.reducer,
   [fromRatings.key]: fromRatings.reducer,
+  [fromUsers.key]: fromUsers.reducer
 };
 
 // console.log all actions in dev mode
@@ -41,6 +44,7 @@ const layoutFeatureState = createFeatureSelector<fromLayout.State>(fromLayout.ke
 const beanFeatureState = createFeatureSelector<fromBeans.State>(fromBeans.key);
 const ratingsFeatureState = createFeatureSelector<fromRatings.State>(fromRatings.key);
 const methodsFeatureState = createFeatureSelector<fromMethods.State>(fromMethods.key);
+const usersFeatureState = createFeatureSelector<fromUsers.State>(fromUsers.key);
 
 const getCurrentView = createSelector(
   layoutFeatureState,
@@ -69,6 +73,8 @@ const {
 } = fromBeans.adapter.getSelectors(beanFeatureState);
 
 const getFilters = createSelector(ratingsFeatureState, (s) => s.filters);
+
+const getCurrentUser = createSelector(usersFeatureState, (s) => s.current);
 
 export const selectors = {
   [fromLayout.key]: {
@@ -104,5 +110,8 @@ export const selectors = {
         (e) => e[id]
       );
     }
+  },
+  [fromUsers.key]: {
+    getCurrentUser
   }
 }
