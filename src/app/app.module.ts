@@ -29,6 +29,8 @@ import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angul
 export class MyHammerConfig extends HammerGestureConfig {
   override overrides = <any> {
     swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
+    pinch: { enable: false },
+    rotate: { enable: false }
   };
 }
 
