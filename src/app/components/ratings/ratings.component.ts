@@ -72,4 +72,22 @@ export class RatingsComponent implements OnInit {
   onToggleFilters(): void {
     this.modalService.open(RatingFilterComponent);
   }
+
+  onSwipeLeft(event: Event) {
+    const target = event.target as HTMLElement;
+
+    if (target.className != 'rating') {
+      target.closest('.rating')?.querySelector('.rating__controls')?.classList.remove('d-none');
+      target.closest('.rating')?.querySelector('.rating__controls')?.classList.add('d-block');
+    }
+  }
+
+  onSwipeRight(event: Event) {
+    const target = event.target as HTMLElement;
+
+    if (target.className != 'rating') {
+      target.closest('.rating')?.querySelector('.rating__controls')?.classList.remove('d-block');
+      target.closest('.rating')?.querySelector('.rating__controls')?.classList.add('d-none');
+    }
+  }
 }

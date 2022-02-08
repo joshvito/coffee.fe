@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromRoot from './state/reducers';
 import { effects } from './state/effects';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { RatingsComponent } from './components/ratings/ratings.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +20,17 @@ import { RatingFilterComponent } from './components/rating-filter/rating-filter.
 import { NewMethodComponent } from './components/brew-methods/new-method.component';
 import { NewBeanComponent } from './components/beans/new-bean.component';
 import { httpInterceptorProviders } from './interceptors';
+
+// particular imports for hammer
+import * as Hammer from 'hammerjs';
+import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  override overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
 
 @NgModule({
   declarations: [
@@ -42,10 +53,15 @@ import { httpInterceptorProviders } from './interceptors';
     BrowserModule,
     StoreModule.forRoot(fromRoot.reducers, {metaReducers: fromRoot.metaReducers}),
     EffectsModule.forRoot([...effects]),
-    NgbModule
+    NgbModule,
+    HammerModule
   ],
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
   ],
   bootstrap: [AppComponent]
 })
