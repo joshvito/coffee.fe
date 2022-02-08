@@ -14,7 +14,7 @@ export const update = createAction('[BREW RATINGS] Update');
 export const updateSuccess = createAction('[BREW RATINGS] Update Success', props<{item: IBrewRatings}>());
 export const updateFailure = createAction('[BREW RATINGS] Update Fail',  props<{errorMsg: string}>());
 
-export const storeFilters = createAction('[Brew Ratings] Store Filters', props<{filters: IFilterBrewRatings}>());
+export const storeFilters = createAction('[BREW RATINGS] Store Filters', props<{filters: IFilterBrewRatings}>());
 
 const all = union({
     getMany,

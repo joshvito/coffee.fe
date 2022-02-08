@@ -28,7 +28,7 @@ import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angul
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   override overrides = <any> {
-    swipe: { direction: Hammer.DIRECTION_ALL },
+    swipe: { direction: Hammer.DIRECTION_LEFT | Hammer.DIRECTION_RIGHT },
   };
 }
 
