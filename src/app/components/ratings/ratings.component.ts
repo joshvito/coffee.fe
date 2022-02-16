@@ -90,4 +90,8 @@ export class RatingsComponent implements OnInit {
       this.store.dispatch(BrewRatingActions.deleteRating({id}));
     }
   }
+
+  onEdit(id: number): void {
+      this.store.dispatch(BrewRatingActions.selectOne({id}));
+  }
 }

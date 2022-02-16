@@ -74,6 +74,17 @@ const {
 
 const getFilters = createSelector(ratingsFeatureState, (s) => s.filters);
 
+const getSelectedRatingId = createSelector(
+  ratingsFeatureState,
+  fromRatings.getSelectedId
+);
+
+const getSelectedRating = createSelector(
+  getRatingEntities,
+  getSelectedRatingId,
+  (d, id) => id !==null ? d[id] : null
+);
+
 const getCurrentUser = createSelector(usersFeatureState, (s) => s.current);
 
 export const selectors = {
@@ -85,7 +96,8 @@ export const selectors = {
     getRatingEntities,
     getAllRatings,
     getTotalRatings,
-    getFilters
+    getFilters,
+    getSelectedRating,
   },
   [fromMethods.key]: {
     getMethodIds,

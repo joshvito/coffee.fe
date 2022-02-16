@@ -1,4 +1,4 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createEntityAdapter, Dictionary, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { IBrewRatings, IFilterBrewRatings } from 'src/app/models/brew-ratings.model';
 import { BrewRatingActions } from '../actions';
@@ -6,7 +6,8 @@ import { BrewRatingActions } from '../actions';
 export const key = 'brew-rating';
 
 export interface State extends EntityState<IBrewRatings> {
-  filters: IFilterBrewRatings | null
+  filters: IFilterBrewRatings | null,
+  selected: number | null,
 };
 
 export function sortByCreatedAt(a: IBrewRatings, b: IBrewRatings): number {
@@ -19,7 +20,8 @@ export const adapter: EntityAdapter<IBrewRatings> = createEntityAdapter<IBrewRat
 });
 
 const initialState: State = adapter.getInitialState({
-  filters: null
+  filters: null,
+  selected: null,
 });
 
 export const reducer = createReducer(
@@ -47,5 +49,14 @@ export const reducer = createReducer(
   on(
     BrewRatingActions.deleteRatingSuccess,
     (state, { item }) => adapter.removeOne(item.id, state),
+  ),
+
+  on(
+    BrewRatingActions.selectOne,
+    (state, { id }) => {
+      return {...state, selected: id}
+    },
   )
 );
+
+export const getSelectedId = (s: State) => s.selected;
