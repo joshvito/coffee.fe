@@ -62,7 +62,7 @@ export class RatingsComponent implements OnInit {
   }
 
   getRoast(roast: Roast | undefined): string | undefined {
-    return roast ? Roast[roast] : undefined;
+    return roast != undefined ? Roast[roast] : undefined;
   }
 
   getMethod(id: number): Observable<IBrewMethod | undefined> {

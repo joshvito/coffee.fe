@@ -26,7 +26,7 @@ import { selectors, State } from 'src/app/state/reducers';
         <select id="method_id" class="form-control" formControlName="method_id"
           [class.is-invalid]="form.get('method_id')?.invalid && form.get('method_id')?.touched">
           <option></option>
-          <option *ngFor="let method of (methods$ | async)" [ngValue]="method.id">{{ method.type }}</option>
+          <option *ngFor="let method of (methods$ | async)" [ngValue]="method.id">{{ method.type }} ({{ method.volume }}{{ method.units}})</option>
         </select>
       </div>
 
