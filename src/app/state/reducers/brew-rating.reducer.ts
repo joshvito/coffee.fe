@@ -42,5 +42,10 @@ export const reducer = createReducer(
   on(
     BrewRatingActions.storeFilters,
     (state, { filters }) => ({...state, filters}),
+  ),
+
+  on(
+    BrewRatingActions.deleteRatingSuccess,
+    (state, { item }) => adapter.removeOne(item.id, state),
   )
 );

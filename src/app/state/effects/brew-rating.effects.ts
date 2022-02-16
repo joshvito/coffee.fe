@@ -27,6 +27,15 @@ export class BrewRatingEffects {
       )),
   ));
 
+  delete$ = createEffect(() => this.actions$.pipe(
+    ofType(BrewRatingActions.deleteRating.type),
+    mergeMap(a => this.service.delete(a.id)
+      .pipe(
+        map(item => BrewRatingActions.deleteRatingSuccess({item})),
+        catchError((err: HttpErrorResponse) => of(BrewRatingActions.deleteRatingFailure({errorMsg: err.message})))
+      )),
+  ));
+
   constructor(
     private actions$: Actions<BrewRatingActions.ActionsUnion>,
     private service: RatingService,

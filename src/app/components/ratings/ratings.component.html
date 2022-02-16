@@ -12,8 +12,8 @@
     <div class="col-12" *ngFor="let r of (ratings$ | async); let i = index">
       <div class="card rating" (swipeleft)="onSwipeLeft($event)" (swiperight)="onSwipeRight($event)">
         <div class="rating__controls position-absolute top-50 end-0 translate-middle-y d-none" *ngIf="r.user_id === (currentUser$ | async)?.id">
-          <i class="far fa-edit me-3"></i>
-          <i class="far fa-trash-alt me-3"></i>
+          <button class="btn btn-link"><i class="far fa-edit fa-fw"></i></button>
+          <button type="button" class="btn btn-link" (click)="onDelete(r.id)"><i class="far fa-trash-alt fa-fw"></i></button>
         </div>
         <div class="card-body">
           <div class="card-title mb-0">

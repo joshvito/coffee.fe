@@ -84,4 +84,10 @@ export class RatingsComponent implements OnInit {
     target.closest('.rating')?.querySelector('.rating__controls')?.classList.remove('d-block');
     target.closest('.rating')?.querySelector('.rating__controls')?.classList.add('d-none');
   }
+
+  onDelete(id: number): void {
+    if(confirm('Are you sure?')) {
+      this.store.dispatch(BrewRatingActions.deleteRating({id}));
+    }
+  }
 }

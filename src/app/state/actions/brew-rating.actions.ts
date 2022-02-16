@@ -16,6 +16,10 @@ export const updateFailure = createAction('[BREW RATINGS] Update Fail',  props<{
 
 export const storeFilters = createAction('[BREW RATINGS] Store Filters', props<{filters: IFilterBrewRatings}>());
 
+export const deleteRating = createAction('[BREW RATINGS] Delete', props<{id: number}>());
+export const deleteRatingSuccess = createAction('[BREW RATINGS] Delete Success', props<{item: IBrewRatings}>());
+export const deleteRatingFailure = createAction('[BREW RATINGS] Delete Fail',  props<{errorMsg: string}>());
+
 const all = union({
     getMany,
     getManySuccess,
@@ -26,7 +30,10 @@ const all = union({
     update,
     updateSuccess,
     updateFailure,
-    storeFilters
+    storeFilters,
+    deleteRating,
+    deleteRatingSuccess,
+    deleteRatingFailure
 });
 
 export type ActionsUnion = typeof all;
