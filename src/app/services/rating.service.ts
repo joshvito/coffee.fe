@@ -36,6 +36,10 @@ export class RatingService {
     return this.http.post<IBrewRatings>(`${environment.apiUrl}ratings`, params);
   }
 
+  update(params: IBrewRatings): Observable<IBrewRatings> {
+    return this.http.put<IBrewRatings>(`${environment.apiUrl}ratings/${params.id}`, params);
+  }
+
   delete(id: number): Observable<IBrewRatings> {
     return this.http.delete<IBrewRatings>(`${environment.apiUrl}ratings/${id}`);
   }

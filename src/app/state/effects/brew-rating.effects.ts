@@ -36,6 +36,15 @@ export class BrewRatingEffects {
       )),
   ));
 
+  update$ = createEffect(() => this.actions$.pipe(
+    ofType(BrewRatingActions.update.type),
+    mergeMap(a => this.service.update(a.item)
+      .pipe(
+        map(item => BrewRatingActions.updateSuccess({item})),
+        catchError((err: HttpErrorResponse) => of(BrewRatingActions.updateFailure({errorMsg: err.message})))
+      )),
+  ));
+
   constructor(
     private actions$: Actions<BrewRatingActions.ActionsUnion>,
     private service: RatingService,

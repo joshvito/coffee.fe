@@ -32,12 +32,7 @@ export const reducer = createReducer(
   ),
 
   on(
-    BrewRatingActions.updateSuccess,
-    (state, { item }) => adapter.upsertOne(item, state),
-  ),
-
-  on(
-    BrewRatingActions.createSuccess,
+    BrewRatingActions.createSuccess, BrewRatingActions.updateSuccess,
     (state, { item }) => adapter.upsertOne(item, state),
   ),
 
