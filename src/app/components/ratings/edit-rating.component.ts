@@ -37,6 +37,7 @@ export class EditRatingComponent implements OnInit {
       'grams': fb.control(null, [Validators.required]),
       'grind': fb.control(null),
       'notes': fb.control('', [Validators.max(255)]),
+      'id': fb.control(null),
     });
     this.methods$ = this.store.select(selectors['brew-method'].getAllMethods);
     this.beans$ = this.store.select(selectors['beans'].getAllBeans);
