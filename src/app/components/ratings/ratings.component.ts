@@ -12,6 +12,7 @@ import { NewRatingComponent } from './new-rating.component';
 import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
 import { ColorizerService } from 'src/app/services/colorizer.service';
 import { IUser } from 'src/app/models/user.model';
+import { EditRatingComponent } from './edit-rating.component';
 
 @Component({
   selector: 'app-ratings',
@@ -93,5 +94,10 @@ export class RatingsComponent implements OnInit {
 
   onEdit(id: number): void {
       this.store.dispatch(BrewRatingActions.selectOne({id}));
+      this.modalService.open(EditRatingComponent).result.then((result) => {
+        this.store.dispatch(BrewRatingActions.update({item: result}));
+      }, (reason) => {
+        console.log('dismissed');
+      });
   }
 }

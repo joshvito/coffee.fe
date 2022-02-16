@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { filter, Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
 import { Aroma, Flavor, Grind } from 'src/app/models/brew-ratings.model';
@@ -10,12 +10,12 @@ import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 
 @Component({
-  selector: 'app-new-rating',
+  selector: 'app-edit-rating',
   templateUrl: 'rating-modal.html',
   styles: [
   ]
 })
-export class NewRatingComponent implements OnInit {
+export class EditRatingComponent implements OnInit {
   form: FormGroup;
   Aroma = Aroma;
   Flavor = Flavor;
@@ -45,6 +45,12 @@ export class NewRatingComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(BrewMethodActions.getMany());
     this.store.dispatch(CoffeeBeanActions.getMany());
+    this.store.pipe(
+      select(selectors['brew-rating'].getSelectedRating),
+      filter(r => !!r)
+    ).subscribe(r => {
+      if(!!r) {this.form.patchValue(r);}
+    });
   }
 
   onSave(): void {

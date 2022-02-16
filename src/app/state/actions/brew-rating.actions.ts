@@ -10,7 +10,7 @@ export const create = createAction('[BREW RATINGS] Create', props<{rating: ICrea
 export const createSuccess = createAction('[BREW RATINGS] Create Success', props<{item: IBrewRatings}>());
 export const createFailure = createAction('[BREW RATINGS] Create Fail',  props<{errorMsg: string}>());
 
-export const update = createAction('[BREW RATINGS] Update');
+export const update = createAction('[BREW RATINGS] Update', props<{item: IBrewRatings}>());
 export const updateSuccess = createAction('[BREW RATINGS] Update Success', props<{item: IBrewRatings}>());
 export const updateFailure = createAction('[BREW RATINGS] Update Fail',  props<{errorMsg: string}>());
 
