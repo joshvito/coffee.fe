@@ -25,6 +25,7 @@ import { httpInterceptorProviders } from './interceptors';
 import * as Hammer from 'hammerjs';
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { SigninerizerComponent } from './components/signinerizer/signinerizer.component';
+import { EditRatingComponent } from './components/ratings/edit-rating.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -49,6 +50,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NewMethodComponent,
     NewBeanComponent,
     SigninerizerComponent,
+    EditRatingComponent,
   ],
   imports: [
     ReactiveFormsModule,

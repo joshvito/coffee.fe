@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { NewRatingComponent } from './new-rating.component';
 import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
 import { ColorizerService } from 'src/app/services/colorizer.service';
 import { IUser } from 'src/app/models/user.model';
+import { EditRatingComponent } from './edit-rating.component';
 
 @Component({
   selector: 'app-ratings',
@@ -27,6 +28,7 @@ export class RatingsComponent implements OnInit {
   methods$: Observable<Dictionary<IBrewMethod>>;
   beans$: Observable<Dictionary<ICoffeeBean>>;
   currentUser$: Observable<IUser | null>;
+  @ViewChildren('rating') ratings!: QueryList<ElementRef>;
 
   constructor(
     private store: Store<State>,
@@ -93,5 +95,12 @@ export class RatingsComponent implements OnInit {
 
   onEdit(id: number): void {
       this.store.dispatch(BrewRatingActions.selectOne({id}));
+      this.modalService.open(EditRatingComponent).result.then((result) => {
+        this.store.dispatch(BrewRatingActions.update({item: result}));
+        this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-block'));
+        this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
+      }, (reason) => {
+        console.log('dismissed');
+      });
   }
 }
