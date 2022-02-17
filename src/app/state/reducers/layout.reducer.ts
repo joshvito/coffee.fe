@@ -9,7 +9,7 @@ export interface State {
 };
 
 const initialState: State = {
-  currentView: LayoutView.Ratings,
+  currentView: LayoutView.Signinerizer,
 };
 
 export const reducer = createReducer(

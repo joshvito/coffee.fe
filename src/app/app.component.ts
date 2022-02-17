@@ -9,6 +9,7 @@ import * as fromReducer from './state/reducers';
   template: `
     <app-nav></app-nav>
     <main class="px-3 my-3" [ngSwitch]="currentLayoutView$ | async">
+      <app-signinerizer *ngSwitchCase="LayoutView.Signinerizer"></app-signinerizer>
       <app-beans *ngSwitchCase="LayoutView.Beans"></app-beans>
       <app-brew-methods *ngSwitchCase="LayoutView.Methods"></app-brew-methods>
       <app-ratings *ngSwitchCase="LayoutView.Ratings"></app-ratings>
