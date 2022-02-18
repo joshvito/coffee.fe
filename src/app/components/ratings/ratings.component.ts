@@ -79,8 +79,6 @@ export class RatingsComponent implements OnInit {
     const target = event.target as HTMLElement;
     const rating = target.closest('.rating');
     const controls = rating?.querySelector('.rating__controls');
-    console.log(rating)
-    console.log(controls);
 
     controls?.classList.remove('d-none');
     controls?.classList.add('d-block');
@@ -90,8 +88,6 @@ export class RatingsComponent implements OnInit {
     const target = event.target as HTMLElement;
     const rating = target.closest('.rating');
     const controls = rating?.querySelector('.rating__controls');
-    console.log(rating)
-    console.log(controls);
 
     controls?.classList.remove('d-block');
     controls?.classList.add('d-none');
