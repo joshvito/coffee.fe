@@ -77,14 +77,24 @@ export class RatingsComponent implements OnInit {
 
   onSwipeLeft(event: Event) {
     const target = event.target as HTMLElement;
-    target.closest('.rating')?.querySelector('.rating__controls')?.classList.remove('d-none');
-    target.closest('.rating')?.querySelector('.rating__controls')?.classList.add('d-block');
+    const rating = target.closest('.rating');
+    const controls = rating?.querySelector('.rating__controls');
+    console.log(rating)
+    console.log(controls);
+
+    controls?.classList.remove('d-none');
+    controls?.classList.add('d-block');
   }
 
   onSwipeRight(event: Event) {
     const target = event.target as HTMLElement;
-    target.closest('.rating')?.querySelector('.rating__controls')?.classList.remove('d-block');
-    target.closest('.rating')?.querySelector('.rating__controls')?.classList.add('d-none');
+    const rating = target.closest('.rating');
+    const controls = rating?.querySelector('.rating__controls');
+    console.log(rating)
+    console.log(controls);
+
+    controls?.classList.remove('d-block');
+    controls?.classList.add('d-none');
   }
 
   onDelete(id: number): void {
