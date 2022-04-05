@@ -44,7 +44,7 @@ export class NewRatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(BrewMethodActions.getMany());
-    this.store.dispatch(CoffeeBeanActions.getMany());
+    this.store.dispatch(CoffeeBeanActions.getMany({page: 1}));
   }
 
   onSave(): void {

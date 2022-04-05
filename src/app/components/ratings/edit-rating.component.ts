@@ -45,7 +45,7 @@ export class EditRatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(BrewMethodActions.getMany());
-    this.store.dispatch(CoffeeBeanActions.getMany());
+    this.store.dispatch(CoffeeBeanActions.getMany({page: 1}));
     this.store.pipe(
       select(selectors['brew-rating'].getSelectedRating),
       filter(r => !!r)

@@ -23,7 +23,7 @@ export interface IPageMeta {
 
 export interface IPageRequest {
   page: number,
-  limit: number,
+  limit?: number,
 }
 
 interface IStringTMap<T> { [key: string]: T; }
@@ -51,6 +51,16 @@ function guidizer() {
 function izerizer(term: string, hyphenate: boolean): string {
   return !!hyphenate ? `${term}-izer` : `${term}izer`;
 }
+
+export const paramMapper = (parameters: IStringAnyMap): IStringStringMap => {
+  return Object.keys(parameters)
+      .reduce((accum, key) => {
+        if (parameters.hasOwnProperty(key) && parameters[key]) {
+          accum[key] = parameters[key].toString();
+        }
+        return accum;
+      }, {} as IStringStringMap);
+};
 
 export {
   ITimestamps,
