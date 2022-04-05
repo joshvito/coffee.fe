@@ -3,7 +3,7 @@
 
   <div class="row gy-3">
     <div class="col-12" *ngFor="let b of (beans$ | async); let i = index" #bean>
-      <div class="card swipe-card">
+      <div class="card swipe-card" (swipeleft)="onSwipeLeft($event)" (swiperight)="onSwipeRight($event)">
         <div class="swipe-card__controls position-absolute top-50 end-0 translate-middle-y d-none">
           <button type="button" class="btn btn-link" (click)="onEdit(b.id)">
             <i class="far fa-edit fa-fw"></i>
