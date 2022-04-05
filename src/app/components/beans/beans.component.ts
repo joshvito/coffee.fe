@@ -49,9 +49,21 @@ export class BeansComponent implements OnInit {
   }
 
   onSwipeLeft(event: Event) {
+    const target = event.target as HTMLElement;
+    const rating = target.closest('.swipe-card');
+    const controls = rating?.querySelector('.swipe-card__controls');
+
+    controls?.classList.remove('d-none');
+    controls?.classList.add('d-block');
   }
 
   onSwipeRight(event: Event) {
+    const target = event.target as HTMLElement;
+    const rating = target.closest('.swipe-card');
+    const controls = rating?.querySelector('.swipe-card__controls');
+
+    controls?.classList.remove('d-block');
+    controls?.classList.add('d-none');
   }
 
 }
