@@ -16,8 +16,7 @@ import { EditRatingComponent } from './edit-rating.component';
 
 @Component({
   selector: 'app-ratings',
-  templateUrl: './ratings.component.html',
-  styleUrls: ['./ratings.component.scss']
+  templateUrl: './ratings.component.html'
 })
 export class RatingsComponent implements OnInit {
   ratings$: Observable<IBrewRatings[]>;
@@ -26,7 +25,6 @@ export class RatingsComponent implements OnInit {
   Roast = Roast;
   Grind = Grind;
   methods$: Observable<Dictionary<IBrewMethod>>;
-  beans$: Observable<Dictionary<ICoffeeBean>>;
   currentUser$: Observable<IUser | null>;
   @ViewChildren('rating') ratings!: QueryList<ElementRef>;
 
@@ -37,22 +35,21 @@ export class RatingsComponent implements OnInit {
   ) {
     this.ratings$ = this.store.select(selectors['brew-rating'].getAllRatings);
     this.methods$ = this.store.select(selectors['brew-method'].getMethodEntities);
-    this.beans$ = this.store.select(selectors['beans'].getBeanEntities);
     this.currentUser$ = this.store.select(selectors['user'].getCurrentUser);
+
+    this.store.select(selectors['beans'].getBeanEntities);
   }
 
   ngOnInit(): void {
     this.store.dispatch(BrewRatingActions.getMany({}));
     this.store.dispatch(BrewMethodActions.getMany());
-    this.store.dispatch(CoffeeBeanActions.getMany());
+    this.store.dispatch(CoffeeBeanActions.getMany({page: 1, limit: 5000}));
   }
 
   onAddRating(): void {
     this.modalService.open(NewRatingComponent).result.then((result) => {
       this.store.dispatch(BrewRatingActions.create({rating: result}));
-    }, (reason) => {
-      console.log('dismissed');
-    });
+    }, (reason) => { });
   }
 
   getColor(rating: IBrewRatings): string {
@@ -105,8 +102,6 @@ export class RatingsComponent implements OnInit {
         this.store.dispatch(BrewRatingActions.update({item: result}));
         this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-block'));
         this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
-      }, (reason) => {
-        console.log('dismissed');
-      });
+      }, (reason) => { });
   }
 }

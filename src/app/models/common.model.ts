@@ -3,11 +3,14 @@ interface ITimestamps {
     updated_at: string;
 }
 
-export interface IPageResult<T> {
+export interface IPageResult<T> extends IPageMeta  {
   data: T[],
+}
+
+export interface IPageMeta {
   total: number,
+  current_page: number;
   per_page: number,
-  current_page: number,
   last_page: number,
   first_page_url: string,
   last_page_url: string,
@@ -16,6 +19,11 @@ export interface IPageResult<T> {
   path: string,
   from: number,
   to: number,
+}
+
+export interface IPageRequest {
+  page: number,
+  limit: number,
 }
 
 interface IStringTMap<T> { [key: string]: T; }

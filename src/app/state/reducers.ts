@@ -121,7 +121,8 @@ export const selectors = {
         getBeanEntities,
         (e) => e[id]
       );
-    }
+    },
+    getPageMeta: createSelector(beanFeatureState, (b) => b.pageMeta)
   },
   [fromUsers.key]: {
     getCurrentUser

@@ -1,8 +1,8 @@
 import { createAction, union, props } from '@ngrx/store';
 import { ICoffeeBean, ICreateBean } from 'src/app/models/bean.model';
-import { IPageResult } from 'src/app/models/common.model';
+import { IPageResult, IPageRequest } from 'src/app/models/common.model';
 
-export const getMany = createAction('[BEANS] Get Beans');
+export const getMany = createAction('[BEANS] Get Beans', props<IPageRequest>());
 export const getManySuccess = createAction('[BEANS] Get Beans Success', props<{page: IPageResult<ICoffeeBean>}>());
 export const getManyFailure = createAction('[BEANS] Get Beans Fail',  props<{errorMsg: string}>());
 

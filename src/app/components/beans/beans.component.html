@@ -1,0 +1,49 @@
+<div class="swipe-wrap">
+  <p *ngIf="!(beans$ | async)?.length">No Beans</p>
+
+  <div class="row gy-3">
+    <div class="col-12" *ngFor="let b of (beans$ | async); let i = index" #bean>
+      <div class="card swipe-card">
+        <div class="swipe-card__controls position-absolute top-50 end-0 translate-middle-y d-none">
+          <button type="button" class="btn btn-link" (click)="onEdit(b.id)">
+            <i class="far fa-edit fa-fw"></i>
+          </button>
+          <button type="button" class="btn btn-link" (click)="onDelete(b.id)">
+            <i class="far fa-trash-alt fa-fw"></i>
+          </button>
+        </div>
+
+        <div class="card-body">
+          <div class="card-title mb-0">
+            {{ b.brand }}<br/>
+            {{ b.origin }}
+          </div>
+
+          <div class="collapse mt-3" id="collapse-{{i}}">
+            <p class="card-text">
+              <!-- Name: {{ b.name }} -->
+              Roast: {{ Roast[b.roast] }}
+            </p>
+            <ng-container *ngIf="b.notes">
+              <p class="bg-light p-2 mb-0 rounded shadow-sm">
+                Notes:<br />
+                {{ b.notes }}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 text-center" *ngIf="pageMeta$ | async as pageMeta">
+    <button class="btn btn-primary px-5" (click)="loadPage(pageMeta.current_page + 1)" *ngIf="pageMeta.current_page < pageMeta.last_page">Load More</button>
+    <p>Showing {{ (beans$ | async)?.length }} of {{ pageMeta.total }}</p>
+  </div>
+
+  <div
+    class="position-fixed bottom-0 end-0 h1 m-3 rounded-circle align-items-center justify-content-center d-flex shadow-sm"
+    style="height: 55px; width: 55px; cursor: pointer">
+    <i class="fas fa-plus-circle d-block" (click)="onAdd()"></i>
+  </div>
+</div>
