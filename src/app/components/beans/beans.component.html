@@ -15,8 +15,10 @@
 
         <div class="card-body">
           <div class="card-title mb-0">
-            {{ b.brand }}<br/>
-            {{ b.origin }}
+            <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
+              <small>{{ b.brand }}</small><br/>
+              {{ b.origin }}
+            </a>
           </div>
 
           <div class="collapse mt-3" id="collapse-{{i}}">
