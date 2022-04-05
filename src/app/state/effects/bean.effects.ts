@@ -11,7 +11,7 @@ export class BeanEffects {
 
   search$ = createEffect(() => this.actions$.pipe(
     ofType(CoffeeBeanActions.getMany.type),
-    mergeMap(a => this.service.getMany()
+    mergeMap(a => this.service.getMany({page: a.page, limit: a.limit})
       .pipe(
         map(page => CoffeeBeanActions.getManySuccess({ page })),
         catchError((err: HttpErrorResponse) => of(CoffeeBeanActions.getManyFailure({errorMsg: err.message})))
