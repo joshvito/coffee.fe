@@ -4,7 +4,7 @@
     <select id="bean_id" class="form-control" formControlName="bean_id"
       [class.is-invalid]="form.get('bean_id')?.invalid && form.get('bean_id')?.touched">
       <option></option>
-      <option *ngFor="let bean of (beans$ | async)" [ngValue]="bean.id">{{ bean.origin }} ({{ Roast[bean.roast] }} Roast)</option>
+      <option *ngFor="let bean of (beans$ | async)" [ngValue]="bean.id">{{ bean.name ? bean.name : bean.origin }} ({{ Roast[bean.roast] }} Roast)</option>
     </select>
   </div>
   <div class="mb-3">
