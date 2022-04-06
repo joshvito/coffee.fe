@@ -24,7 +24,9 @@
 
             <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
               {{ r.created_at | date:"MMM d, y" }} <br/>
-              {{ (getBean(r.bean_id) | async)?.origin }} ({{ getRoast((getBean(r.bean_id) | async)?.roast) }} Roast)
+              <ng-container *ngIf="getBean(r.bean_id) | async as bean">
+                {{ bean.name ? bean.name : bean.origin }} ({{ getRoast(bean.roast) }} Roast)
+              </ng-container>
             </a>
           </div>
 
