@@ -17,14 +17,14 @@
           <div class="card-title mb-0">
             <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
               <small>{{ b.brand }}</small><br/>
-              {{ b.origin }}
+              {{ b.name ? b.name : b.origin }} <small>({{ Roast[b.roast] }})</small>
             </a>
           </div>
 
           <div class="collapse mt-3" id="collapse-{{i}}">
             <p class="card-text">
-              <!-- Name: {{ b.name }} -->
-              Roast: {{ Roast[b.roast] }}
+              Name: {{ b.name }}
+              Origin: {{ b.origin }}
             </p>
             <ng-container *ngIf="b.notes">
               <p class="bg-light p-2 mb-0 rounded shadow-sm">

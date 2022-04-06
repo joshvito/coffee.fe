@@ -9,6 +9,7 @@ export interface ICoffeeBean extends ITimestamps, ICreateBean {
 }
 
 export interface ICreateBean {
+  name: string;
   brand: string;
   origin: string;
   roast: Roast;
