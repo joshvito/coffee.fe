@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { filter, Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Aroma, Flavor, Grind } from 'src/app/models/brew-ratings.model';
+import { Aroma, Flavor, Grind } from 'src/app/models/rating.model';
 import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 

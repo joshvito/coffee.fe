@@ -1,3 +1,4 @@
+import { IRatings } from './rating.model';
 import { INumberBooleanMap, IPageRequest, ITimestamps } from './common.model';
 
 export enum Grind {
@@ -7,6 +8,7 @@ export enum Grind {
 export interface IBrew extends ITimestamps, ICreateBrew {
     id: number;
     user_id: number;
+    ratings: IRatings[]
 }
 
 export interface ICreateBrew {

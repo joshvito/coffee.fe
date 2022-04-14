@@ -1,21 +1,21 @@
-import { createEntityAdapter, Dictionary, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { IBrewRatings, IFilterBrewRatings } from 'src/app/models/brew-ratings.model';
+import { IBrew, IFilterBrew } from 'src/app/models/brew.model';
 import { BrewRatingActions } from '../actions';
 
-export const key = 'brew-rating';
+export const key = 'brew';
 
-export interface State extends EntityState<IBrewRatings> {
-  filters: IFilterBrewRatings | null,
+export interface State extends EntityState<IBrew> {
+  filters: IFilterBrew | null,
   selected: number | null,
 };
 
-export function sortByCreatedAt(a: IBrewRatings, b: IBrewRatings): number {
+export function sortByCreatedAt(a: IBrew, b: IBrew): number {
   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
 }
 
-export const adapter: EntityAdapter<IBrewRatings> = createEntityAdapter<IBrewRatings>({
-  selectId: (ad: IBrewRatings) => ad.id,
+export const adapter: EntityAdapter<IBrew> = createEntityAdapter<IBrew>({
+  selectId: (ad: IBrew) => ad.id,
   sortComparer: sortByCreatedAt,
 });
 
@@ -38,7 +38,7 @@ export const reducer = createReducer(
 
   on(
     BrewRatingActions.storeFilters,
-    (state, { filters }) => ({...state, filters}),
+    (state, { filters }) => ({...state, filters: filters as IFilterBrew}),
   ),
 
   on(

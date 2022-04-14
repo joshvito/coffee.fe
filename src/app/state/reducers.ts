@@ -2,7 +2,7 @@ import { ActionReducer, ActionReducerMap, createFeatureSelector, createSelector,
 import { environment } from 'src/environments/environment';
 import * as fromLayout from './reducers/layout.reducer';
 import * as fromBeans from './reducers/bean.reducer';
-import * as fromRatings from './reducers/brew-rating.reducer';
+import * as fromRatings from './reducers/brew.reducer';
 import * as fromMethods from './reducers/brew-method.reducer';
 import * as fromUsers from './reducers/user.reducer';
 
