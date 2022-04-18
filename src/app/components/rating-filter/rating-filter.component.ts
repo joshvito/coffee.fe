@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, Observable, tap } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { BrewRatingActions } from 'src/app/state/actions';
+import { BrewActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 
 @Component({
@@ -63,7 +63,7 @@ export class RatingFilterComponent implements OnInit {
 
   ngOnInit(): void {
     combineLatest(
-      [this.beans$, this.methods$, this.store.select(selectors['brew-rating'].getFilters)]
+      [this.beans$, this.methods$, this.store.select(selectors['brew'].getFilters)]
     ).pipe(
       tap(([b, m, f]) => {
         b.reduce((a, v) => {
@@ -88,8 +88,8 @@ export class RatingFilterComponent implements OnInit {
 
   onSubmit(): void {
     const filters = this.form.value;
-    this.store.dispatch(BrewRatingActions.storeFilters({filters}));
-    this.store.dispatch(BrewRatingActions.getMany({filters}));
+    this.store.dispatch(BrewActions.storeFilters({filters}));
+    this.store.dispatch(BrewActions.getMany({filters}));
     this.activeModal.close();
   }
 

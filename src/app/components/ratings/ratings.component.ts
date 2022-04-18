@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Aroma, Flavor, Grind, IBrewRatings } from 'src/app/models/rating.model';
-import { BrewMethodActions, BrewRatingActions, CoffeeBeanActions } from 'src/app/state/actions';
+import { Grind, IBrew } from 'src/app/models/brew.model';
+import { BrewMethodActions, BrewActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 import { NewRatingComponent } from './new-rating.component';
 import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
@@ -19,9 +19,7 @@ import { EditRatingComponent } from './edit-rating.component';
   templateUrl: './ratings.component.html'
 })
 export class RatingsComponent implements OnInit {
-  ratings$: Observable<IBrewRatings[]>;
-  Aroma = Aroma;
-  Flavor = Flavor;
+  ratings$: Observable<IBrew[]>;
   Roast = Roast;
   Grind = Grind;
   methods$: Observable<Dictionary<IBrewMethod>>;
@@ -33,7 +31,7 @@ export class RatingsComponent implements OnInit {
     private modalService: NgbModal,
     private colorizer: ColorizerService,
   ) {
-    this.ratings$ = this.store.select(selectors['brew-rating'].getAllRatings);
+    this.ratings$ = this.store.select(selectors['brew'].getAllRatings);
     this.methods$ = this.store.select(selectors['brew-method'].getMethodEntities);
     this.currentUser$ = this.store.select(selectors['user'].getCurrentUser);
 
@@ -41,19 +39,20 @@ export class RatingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(BrewRatingActions.getMany({}));
+    this.store.dispatch(BrewActions.getMany({}));
     this.store.dispatch(BrewMethodActions.getMany());
     this.store.dispatch(CoffeeBeanActions.getMany({page: 1, limit: 5000}));
   }
 
   onAddRating(): void {
     this.modalService.open(NewRatingComponent).result.then((result) => {
-      this.store.dispatch(BrewRatingActions.create({rating: result}));
+      this.store.dispatch(BrewActions.create({brew: result}));
     }, (reason) => { });
   }
 
-  getColor(rating: IBrewRatings): string {
-    return this.colorizer.color(rating);
+  getColor(brew: IBrew): string {
+    // TODO: this is probs broken
+    return this.colorizer.color(brew.ratings[0]);
   }
 
   getBean(id: number): Observable<ICoffeeBean | undefined> {
@@ -92,14 +91,14 @@ export class RatingsComponent implements OnInit {
 
   onDelete(id: number): void {
     if(confirm('Are you sure?')) {
-      this.store.dispatch(BrewRatingActions.deleteRating({id}));
+      this.store.dispatch(BrewActions.deleteRating({id}));
     }
   }
 
   onEdit(id: number): void {
-      this.store.dispatch(BrewRatingActions.selectOne({id}));
+      this.store.dispatch(BrewActions.selectOne({id}));
       this.modalService.open(EditRatingComponent).result.then((result) => {
-        this.store.dispatch(BrewRatingActions.update({item: result}));
+        this.store.dispatch(BrewActions.update({item: result}));
         this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-block'));
         this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
       }, (reason) => { });

@@ -2,7 +2,7 @@ import { ActionReducer, ActionReducerMap, createFeatureSelector, createSelector,
 import { environment } from 'src/environments/environment';
 import * as fromLayout from './reducers/layout.reducer';
 import * as fromBeans from './reducers/bean.reducer';
-import * as fromRatings from './reducers/brew.reducer';
+import * as fromBrew from './reducers/brew.reducer';
 import * as fromMethods from './reducers/brew-method.reducer';
 import * as fromUsers from './reducers/user.reducer';
 
@@ -10,7 +10,7 @@ export interface State {
   [fromLayout.key]: fromLayout.State;
   [fromBeans.key]: fromBeans.State;
   [fromMethods.key]: fromMethods.State;
-  [fromRatings.key]: fromRatings.State;
+  [fromBrew.key]: fromBrew.State;
   [fromUsers.key]: fromUsers.State;
 }
 
@@ -18,7 +18,7 @@ export const reducers: ActionReducerMap<State> = {
   [fromLayout.key]: fromLayout.reducer,
   [fromBeans.key]: fromBeans.reducer,
   [fromMethods.key]: fromMethods.reducer,
-  [fromRatings.key]: fromRatings.reducer,
+  [fromBrew.key]: fromBrew.reducer,
   [fromUsers.key]: fromUsers.reducer
 };
 
@@ -42,7 +42,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 
 const layoutFeatureState = createFeatureSelector<fromLayout.State>(fromLayout.key);
 const beanFeatureState = createFeatureSelector<fromBeans.State>(fromBeans.key);
-const ratingsFeatureState = createFeatureSelector<fromRatings.State>(fromRatings.key);
+const ratingsFeatureState = createFeatureSelector<fromBrew.State>(fromBrew.key);
 const methodsFeatureState = createFeatureSelector<fromMethods.State>(fromMethods.key);
 const usersFeatureState = createFeatureSelector<fromUsers.State>(fromUsers.key);
 
@@ -56,7 +56,7 @@ const {
   selectEntities: getRatingEntities,
   selectAll: getAllRatings,
   selectTotal: getTotalRatings
-} = fromRatings.adapter.getSelectors(ratingsFeatureState);
+} = fromBrew.adapter.getSelectors(ratingsFeatureState);
 
 const {
   selectIds: getMethodIds,
@@ -76,7 +76,7 @@ const getFilters = createSelector(ratingsFeatureState, (s) => s.filters);
 
 const getSelectedRatingId = createSelector(
   ratingsFeatureState,
-  fromRatings.getSelectedId
+  fromBrew.getSelectedId
 );
 
 const getSelectedRating = createSelector(
@@ -91,7 +91,7 @@ export const selectors = {
   [fromLayout.key]: {
     getCurrentView,
   },
-  [fromRatings.key]: {
+  [fromBrew.key]: {
     getRatingIds,
     getRatingEntities,
     getAllRatings,

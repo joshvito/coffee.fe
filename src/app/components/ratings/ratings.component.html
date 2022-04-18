@@ -33,8 +33,8 @@
           <div class="collapse mt-3" id="collapse-{{i}}">
             <p class="card-text">
               Method: {{ (getMethod(r.method_id) | async)?.type }}<br/>
-              Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/>
-              Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/>
+              <!-- Flavor: {{ Flavor[r.flavor] | sentenceCase }}<br/> -->
+              <!-- Aroma: {{ Aroma[r.aroma] | sentenceCase }}<br/> -->
               Grams: {{ r.grams }}g <span *ngIf="r?.grind !== null">({{ (r.grind !== undefined && r.grind > -1 !== null ? Grind[r.grind] : 'Unknown') | sentenceCase}})</span>
             </p>
             <ng-container *ngIf="r.notes">

@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { IBrew, IFilterBrew } from 'src/app/models/brew.model';
-import { BrewRatingActions } from '../actions';
+import { BrewActions } from '../actions';
 
 export const key = 'brew';
 
@@ -27,27 +27,27 @@ const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
   on(
-    BrewRatingActions.getManySuccess,
+    BrewActions.getManySuccess,
     (state, { page }) => adapter.setAll(page.data, state),
   ),
 
   on(
-    BrewRatingActions.createSuccess, BrewRatingActions.updateSuccess,
+    BrewActions.createSuccess, BrewActions.updateSuccess,
     (state, { item }) => adapter.upsertOne(item, state),
   ),
 
   on(
-    BrewRatingActions.storeFilters,
+    BrewActions.storeFilters,
     (state, { filters }) => ({...state, filters: filters as IFilterBrew}),
   ),
 
   on(
-    BrewRatingActions.deleteRatingSuccess,
+    BrewActions.deleteRatingSuccess,
     (state, { item }) => adapter.removeOne(item.id, state),
   ),
 
   on(
-    BrewRatingActions.selectOne,
+    BrewActions.selectOne,
     (state, { id }) => {
       return {...state, selected: id}
     },
