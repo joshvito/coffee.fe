@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { filter, Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Aroma, Flavor, Grind } from 'src/app/models/brew-ratings.model';
+import { Grind } from 'src/app/models/brew.model';
 import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 
@@ -17,8 +17,6 @@ import { selectors, State } from 'src/app/state/reducers';
 })
 export class EditRatingComponent implements OnInit {
   form: FormGroup;
-  Aroma = Aroma;
-  Flavor = Flavor;
   Roast = Roast;
   Grind = Grind;
   methods$: Observable<IBrewMethod[]>;
@@ -47,7 +45,7 @@ export class EditRatingComponent implements OnInit {
     this.store.dispatch(BrewMethodActions.getMany());
     this.store.dispatch(CoffeeBeanActions.getMany({page: 1}));
     this.store.pipe(
-      select(selectors['brew-rating'].getSelectedRating),
+      select(selectors['brew'].getSelectedRating),
       filter(r => !!r)
     ).subscribe(r => {
       if(!!r) {this.form.patchValue(r);}

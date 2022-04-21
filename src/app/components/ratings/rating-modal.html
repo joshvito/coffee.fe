@@ -21,7 +21,7 @@
     <select id="flavor" class="form-control" formControlName="flavor"
       [class.is-invalid]="form.get('flavor')?.invalid && form.get('flavor')?.touched">
       <option></option>
-      <option *ngFor="let kvp of (Flavor | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option>
+      <!-- <option *ngFor="let kvp of (Flavor | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option> -->
     </select>
   </div>
 
@@ -30,7 +30,7 @@
     <select id="aroma" class="form-control" formControlName="aroma"
       [class.is-invalid]="form.get('aroma')?.invalid && form.get('aroma')?.touched">
       <option></option>
-      <option *ngFor="let kvp of (Aroma | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option>
+      <!-- <option *ngFor="let kvp of (Aroma | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option> -->
     </select>
   </div>
 

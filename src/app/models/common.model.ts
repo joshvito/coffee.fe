@@ -1,3 +1,5 @@
+import { HttpParams } from '@angular/common/http';
+
 interface ITimestamps {
     created_at: string;
     updated_at: string;
@@ -52,6 +54,12 @@ function izerizer(term: string, hyphenate: boolean): string {
   return !!hyphenate ? `${term}-izer` : `${term}izer`;
 }
 
+function addPageParams(params: HttpParams, pagequery: Partial<IPageRequest>): HttpParams {
+  if(pagequery?.limit) params = params.set('limit', pagequery.limit);
+  if(pagequery?.page) params = params.set('page', pagequery.page);
+  return params;
+}
+
 export const paramMapper = (parameters: IStringAnyMap): IStringStringMap => {
   return Object.keys(parameters)
       .reduce((accum, key) => {
@@ -77,4 +85,5 @@ export {
   getRandomInteger,
   guidizer,
   izerizer,
+  addPageParams,
 }
