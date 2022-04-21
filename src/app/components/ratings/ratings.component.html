@@ -28,7 +28,7 @@
             <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
               <ng-container *ngIf="getBean(r.bean_id) | async as bean">
                 <div class="d-flex">
-                  <span class="fs-6">{{ r.created_at | date:"MMM d, y" }}</span>
+                  <span class="fs-6 flex-grow-1">{{ r.created_at | date:"MMM d, y" }}</span>
                   <span class="badge bg-primary fs-6">{{ getRoast(bean.roast) }} Roast</span>
                 </div>
 
