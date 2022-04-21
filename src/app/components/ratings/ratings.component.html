@@ -11,21 +11,40 @@
   <div class="row gy-3">
     <div class="col-12" *ngFor="let r of (ratings$ | async); let i = index" #rating>
       <div class="card swipe-card" (swipeleft)="onSwipeLeft($event)" (swiperight)="onSwipeRight($event)">
+
         <div class="swipe-card__controls position-absolute top-50 end-0 translate-middle-y d-none" *ngIf="r.user_id === (currentUser$ | async)?.id">
           <button type="button" class="btn btn-link" (click)="onEdit(r.id)"><i class="far fa-edit fa-fw"></i></button>
           <button type="button" class="btn btn-link" (click)="onDelete(r.id)"><i class="far fa-trash-alt fa-fw"></i></button>
         </div>
+
         <div class="card-body">
           <div class="card-title mb-0">
-            <span [ngStyle]="{'background-color': getColor(r), '--bs-bg-opacity': 1}"
+
+            <!-- <span [ngStyle]="{'background-color': getColor(r), '--bs-bg-opacity': 1}"
               class="position-absolute top-50 end-0 translate-middle p-2 border border-light rounded-circle">
               <span class="visually-hidden">color dot</span>
-            </span>
+            </span> -->
 
             <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
-              {{ r.created_at | date:"MMM d, y" }} <br/>
               <ng-container *ngIf="getBean(r.bean_id) | async as bean">
-                {{ bean.name ? bean.name : bean.origin }} <small>({{ getRoast(bean.roast) }} Roast)</small>
+                <div class="d-flex">
+                  <span class="fs-6">{{ r.created_at | date:"MMM d, y" }}</span>
+                  <span class="badge bg-primary fs-6">{{ getRoast(bean.roast) }} Roast</span>
+                </div>
+
+                <div class="d-flex">
+                  <div class="flex-grow-1">
+                    <span class="text-uppercase fs-6">{{ bean.name ? bean.name : bean.origin }}</span>
+                    <span class="fs-6">{{ bean.brand }}</span>
+                  </div>
+                  <div class="fs-6">
+                    <i class="fa fa-solid fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-solid fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-solid fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-solid fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-solid fa-star" aria-hidden="true"></i>
+                  </div>
+                </div>
               </ng-container>
             </a>
           </div>
