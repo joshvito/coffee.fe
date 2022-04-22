@@ -16,22 +16,23 @@ import { EditRatingComponent } from './edit-rating.component';
 
 @Component({
   selector: 'app-ratings',
-  templateUrl: './ratings.component.html'
+  templateUrl: './ratings.component.html',
+  styleUrls: ['./ratings.scss']
 })
 export class RatingsComponent implements OnInit {
-  ratings$: Observable<IBrew[]>;
+  brews$: Observable<IBrew[]>;
   Roast = Roast;
   Grind = Grind;
   methods$: Observable<Dictionary<IBrewMethod>>;
   currentUser$: Observable<IUser | null>;
-  @ViewChildren('rating') ratings!: QueryList<ElementRef>;
+  @ViewChildren('brew') brews!: QueryList<ElementRef>;
 
   constructor(
     private store: Store<State>,
     private modalService: NgbModal,
     private colorizer: ColorizerService,
   ) {
-    this.ratings$ = this.store.select(selectors['brew'].getAllRatings);
+    this.brews$ = this.store.select(selectors['brew'].getAllRatings);
     this.methods$ = this.store.select(selectors['brew-method'].getMethodEntities);
     this.currentUser$ = this.store.select(selectors['user'].getCurrentUser);
 
@@ -99,8 +100,8 @@ export class RatingsComponent implements OnInit {
       this.store.dispatch(BrewActions.selectOne({id}));
       this.modalService.open(EditRatingComponent).result.then((result) => {
         this.store.dispatch(BrewActions.update({item: result}));
-        this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-flex'));
-        this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
+        this.brews.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-flex'));
+        this.brews.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
       }, (reason) => { });
   }
 }
