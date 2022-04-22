@@ -77,7 +77,7 @@ export class RatingsComponent implements OnInit {
     const controls = rating?.querySelector('.swipe-card__controls');
 
     controls?.classList.remove('d-none');
-    controls?.classList.add('d-block');
+    controls?.classList.add('d-flex');
   }
 
   onSwipeRight(event: Event) {
@@ -85,7 +85,7 @@ export class RatingsComponent implements OnInit {
     const rating = target.closest('.swipe-card');
     const controls = rating?.querySelector('.swipe-card__controls');
 
-    controls?.classList.remove('d-block');
+    controls?.classList.remove('d-flex');
     controls?.classList.add('d-none');
   }
 
