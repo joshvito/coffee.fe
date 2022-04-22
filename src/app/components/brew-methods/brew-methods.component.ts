@@ -22,7 +22,7 @@ import { NewMethodComponent } from './new-method.component';
     </div>
   </div>
 
-  <div class="position-fixed bottom-0 end-0 h1 m-3 rounded-circle align-items-center justify-content-center d-flex shadow-sm"
+  <div class="position-fixed bottom-0 end-0 h1 m-3 rounded-circle align-items-center justify-content-center d-flex shadow-lg"
     style="height: 55px; width: 55px; cursor: pointer; background: #fff">
     <i class="fas fa-plus-circle d-block" (click)="onAdd()"></i>
   </div>
