@@ -99,7 +99,7 @@ export class RatingsComponent implements OnInit {
       this.store.dispatch(BrewActions.selectOne({id}));
       this.modalService.open(EditRatingComponent).result.then((result) => {
         this.store.dispatch(BrewActions.update({item: result}));
-        this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-block'));
+        this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-flex'));
         this.ratings.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
       }, (reason) => { });
   }
