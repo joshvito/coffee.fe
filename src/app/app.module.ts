@@ -26,6 +26,7 @@ import * as Hammer from 'hammerjs';
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { SigninerizerComponent } from './components/signinerizer/signinerizer.component';
 import { EditRatingComponent } from './components/ratings/edit-rating.component';
+import { UserInitialsPipe } from './pipes/user-initials.pipe';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -51,6 +52,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NewBeanComponent,
     SigninerizerComponent,
     EditRatingComponent,
+    UserInitialsPipe,
   ],
   imports: [
     ReactiveFormsModule,
