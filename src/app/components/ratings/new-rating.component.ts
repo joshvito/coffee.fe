@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
-import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 
 @Component({
@@ -28,13 +27,11 @@ export class NewRatingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(BrewMethodActions.getMany());
-    this.store.dispatch(CoffeeBeanActions.getMany({page: 1}));
     this.store.pipe(
       select(selectors['brew'].getSelectedBrew),
       filter(r => !!r)
     ).subscribe(b => {
-      if(!!b) {this.form.setValue({'brew_id': b.id})}
+      if(!!b) {this.form.patchValue({'brew_id': b.id})}
     });
   }
 
