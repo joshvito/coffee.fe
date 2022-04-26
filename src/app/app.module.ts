@@ -1,3 +1,6 @@
+// particular imports for hammer
+import * as Hammer from 'hammerjs';
+import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -12,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { RatingsComponent } from './components/ratings/ratings.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NewRatingComponent } from './components/ratings/new-rating.component';
+import { NewBrewComponent } from './components/ratings/new-brew.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { SentenceCasePipe } from './pipes/sentence-case.pipe';
@@ -20,13 +23,11 @@ import { RatingFilterComponent } from './components/rating-filter/rating-filter.
 import { NewMethodComponent } from './components/brew-methods/new-method.component';
 import { NewBeanComponent } from './components/beans/new-bean.component';
 import { httpInterceptorProviders } from './interceptors';
-
-// particular imports for hammer
-import * as Hammer from 'hammerjs';
-import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { SigninerizerComponent } from './components/signinerizer/signinerizer.component';
-import { EditRatingComponent } from './components/ratings/edit-rating.component';
+import { EditBrewComponent } from './components/ratings/edit-brew.component';
 import { UserInitialsPipe } from './pipes/user-initials.pipe';
+import { NewRatingComponent } from './components/ratings/new-rating.component';
+import { EditRatingComponent } from './components/ratings/edit-rating.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -44,15 +45,17 @@ export class MyHammerConfig extends HammerGestureConfig {
     BrewMethodsComponent,
     BeansComponent,
     RatingsComponent,
-    NewRatingComponent,
+    NewBrewComponent,
     EnumToArrayPipe,
     SentenceCasePipe,
     RatingFilterComponent,
     NewMethodComponent,
     NewBeanComponent,
     SigninerizerComponent,
-    EditRatingComponent,
+    EditBrewComponent,
     UserInitialsPipe,
+    NewRatingComponent,
+    EditRatingComponent,
   ],
   imports: [
     ReactiveFormsModule,

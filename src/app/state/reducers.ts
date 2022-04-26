@@ -42,7 +42,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 
 const layoutFeatureState = createFeatureSelector<fromLayout.State>(fromLayout.key);
 const beanFeatureState = createFeatureSelector<fromBeans.State>(fromBeans.key);
-const ratingsFeatureState = createFeatureSelector<fromBrew.State>(fromBrew.key);
+const brewsFeatureState = createFeatureSelector<fromBrew.State>(fromBrew.key);
 const methodsFeatureState = createFeatureSelector<fromMethods.State>(fromMethods.key);
 const usersFeatureState = createFeatureSelector<fromUsers.State>(fromUsers.key);
 
@@ -52,11 +52,11 @@ const getCurrentView = createSelector(
 )
 
 const {
-  selectIds: getRatingIds,
-  selectEntities: getRatingEntities,
-  selectAll: getAllRatings,
-  selectTotal: getTotalRatings
-} = fromBrew.adapter.getSelectors(ratingsFeatureState);
+  selectIds: getBrewIds,
+  selectEntities: getBrewEntities,
+  selectAll: getAllBrews,
+  selectTotal: getTotalBrews
+} = fromBrew.adapter.getSelectors(brewsFeatureState);
 
 const {
   selectIds: getMethodIds,
@@ -72,18 +72,29 @@ const {
   selectTotal: getTotalBeans
 } = fromBeans.adapter.getSelectors(beanFeatureState);
 
-const getFilters = createSelector(ratingsFeatureState, (s) => s.filters);
+const getFilters = createSelector(brewsFeatureState, (s) => s.filters);
 
-const getSelectedRatingId = createSelector(
-  ratingsFeatureState,
+const getSelectedBrewId = createSelector(
+  brewsFeatureState,
   fromBrew.getSelectedId
 );
 
-const getSelectedRating = createSelector(
-  getRatingEntities,
-  getSelectedRatingId,
+const getSelectedBrew = createSelector(
+  getBrewEntities,
+  getSelectedBrewId,
   (d, id) => id !==null ? d[id] : null
 );
+
+const getSelectedRatingId = createSelector(
+  brewsFeatureState,
+  fromBrew.getSelectedRatingId
+)
+
+const getSelectedRating = createSelector(
+  getSelectedBrew,
+  getSelectedRatingId,
+  (b, r_id) => b?.ratings.find(r => r.id === r_id)
+)
 
 const getCurrentUser = createSelector(usersFeatureState, (s) => s.current);
 
@@ -92,11 +103,12 @@ export const selectors = {
     getCurrentView,
   },
   [fromBrew.key]: {
-    getRatingIds,
-    getRatingEntities,
-    getAllRatings,
-    getTotalRatings,
+    getBrewIds,
+    getBrewEntities,
+    getAllBrews,
+    getTotalBrews,
     getFilters,
+    getSelectedBrew,
     getSelectedRating,
   },
   [fromMethods.key]: {

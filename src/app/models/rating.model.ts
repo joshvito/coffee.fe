@@ -1,7 +1,7 @@
 import { ITimestamps } from './common.model';
 import { IUser } from './user.model';
 
-export interface IRatings extends ITimestamps, ICreateRating {
+export interface IRating extends ITimestamps, ICreateRating {
     id: number;
     user_id: number;
     user: IUser;

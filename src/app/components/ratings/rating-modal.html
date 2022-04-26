@@ -1,52 +1,14 @@
 <form [formGroup]="form" class="m-4" (ngSubmit)="onSave()">
   <div class="mb-3">
-    <label for="bean_id" class="form-label">Bean</label>
-    <select id="bean_id" class="form-control" formControlName="bean_id"
-      [class.is-invalid]="form.get('bean_id')?.invalid && form.get('bean_id')?.touched">
-      <option></option>
-      <option *ngFor="let bean of (beans$ | async)" [ngValue]="bean.id">{{ bean.name ? bean.name : bean.origin }} ({{ Roast[bean.roast] }} Roast)</option>
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="method_id" class="form-label">Method</label>
-    <select id="method_id" class="form-control" formControlName="method_id"
-      [class.is-invalid]="form.get('method_id')?.invalid && form.get('method_id')?.touched">
-      <option></option>
-      <option *ngFor="let method of (methods$ | async)" [ngValue]="method.id">{{ method.type }} ({{ method.volume }}{{ method.units}})</option>
-    </select>
+    <label for="aroma" class="form-label">Aroma</label>
+    <input id="aroma" class="form-control" formControlName="aroma" type="number"
+      [class.is-invalid]="form.get('aroma')?.invalid && form.get('aroma')?.touched" />
   </div>
 
   <div class="mb-3">
     <label for="flavor" class="form-label">Flavor</label>
-    <select id="flavor" class="form-control" formControlName="flavor"
-      [class.is-invalid]="form.get('flavor')?.invalid && form.get('flavor')?.touched">
-      <option></option>
-      <!-- <option *ngFor="let kvp of (Flavor | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option> -->
-    </select>
-  </div>
-
-  <div class="mb-3">
-    <label for="aroma" class="form-label">Aroma</label>
-    <select id="aroma" class="form-control" formControlName="aroma"
-      [class.is-invalid]="form.get('aroma')?.invalid && form.get('aroma')?.touched">
-      <option></option>
-      <!-- <option *ngFor="let kvp of (Aroma | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option> -->
-    </select>
-  </div>
-
-  <div class="mb-3">
-    <label for="grams" class="form-label">Grams</label>
-    <input type="number" id="grams" class="form-control" formControlName="grams"
-      [class.is-invalid]="form.get('grams')?.invalid && form.get('grams')?.touched" />
-  </div>
-
-  <div class="mb-3">
-    <label for="grind" class="form-label">Grind</label>
-    <select id="grind" class="form-control" formControlName="grind"
-      [class.is-invalid]="form.get('grind')?.invalid && form.get('grind')?.touched">
-      <option></option>
-      <option *ngFor="let kvp of (Grind | enumToArray)" [ngValue]="kvp.key">{{ kvp.value | sentenceCase }}</option>
-    </select>
+    <input id="flavor" class="form-control" formControlName="flavor" type="number"
+      [class.is-invalid]="form.get('flavor')?.invalid && form.get('flavor')?.touched" />
   </div>
 
   <div class="mb-3">

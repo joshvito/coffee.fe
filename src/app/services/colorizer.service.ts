@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IRatings } from '../models/rating.model';
+import { IRating } from '../models/rating.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,11 @@ export class ColorizerService {
 
   constructor() { }
 
-  color(rating: IRatings): string {
+  color(rating: IRating): string {
     return this.colorize(this.calculatorize(rating));
   }
 
-  private calculatorize(rating: IRatings): number {
+  private calculatorize(rating: IRating): number {
     return 0 + rating.aroma + rating.flavor;
   }
 // yellow
