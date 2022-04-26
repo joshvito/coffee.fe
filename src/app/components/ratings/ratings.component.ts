@@ -5,13 +5,16 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
 import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Grind, IBrew } from 'src/app/models/brew.model';
-import { BrewMethodActions, BrewActions, CoffeeBeanActions } from 'src/app/state/actions';
+import { Grind, IBrew, ICreateBrew } from 'src/app/models/brew.model';
+import { BrewMethodActions, BrewActions, CoffeeBeanActions, RatingActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
-import { NewRatingComponent } from './new-rating.component';
+import { NewBrewComponent } from './new-brew.component';
 import { RatingFilterComponent } from '../rating-filter/rating-filter.component';
 import { ColorizerService } from 'src/app/services/colorizer.service';
 import { IUser } from 'src/app/models/user.model';
+import { EditBrewComponent } from './edit-brew.component';
+import { NewRatingComponent } from './new-rating.component';
+import { ICreateRating, IRating } from 'src/app/models/rating.model';
 import { EditRatingComponent } from './edit-rating.component';
 
 @Component({
@@ -32,7 +35,7 @@ export class RatingsComponent implements OnInit {
     private modalService: NgbModal,
     private colorizer: ColorizerService,
   ) {
-    this.brews$ = this.store.select(selectors['brew'].getAllRatings);
+    this.brews$ = this.store.select(selectors['brew'].getAllBrews);
     this.methods$ = this.store.select(selectors['brew-method'].getMethodEntities);
     this.currentUser$ = this.store.select(selectors['user'].getCurrentUser);
 
@@ -45,8 +48,8 @@ export class RatingsComponent implements OnInit {
     this.store.dispatch(CoffeeBeanActions.getMany({page: 1, limit: 5000}));
   }
 
-  onAddRating(): void {
-    this.modalService.open(NewRatingComponent).result.then((result) => {
+  onAddBrew(): void {
+    this.modalService.open(NewBrewComponent).result.then((result: ICreateBrew) => {
       this.store.dispatch(BrewActions.create({brew: result}));
     }, (reason) => { });
   }
@@ -96,12 +99,37 @@ export class RatingsComponent implements OnInit {
     }
   }
 
-  onEdit(id: number): void {
-      this.store.dispatch(BrewActions.selectOne({id}));
-      this.modalService.open(EditRatingComponent).result.then((result) => {
+  /**
+   * removes classed from hammerjs slide action
+   */
+  manipulateDom() {
+    this.brews.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-flex'));
+    this.brews.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
+  }
+
+  onEdit(brew_id: number): void {
+      this.store.dispatch(BrewActions.selectOne({id: brew_id}));
+      this.modalService.open(EditBrewComponent).result.then((result: IBrew) => {
         this.store.dispatch(BrewActions.update({item: result}));
-        this.brews.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.remove('d-flex'));
-        this.brews.forEach(f => f.nativeElement?.querySelector('.rating__controls')?.classList.add('d-none'));
+        this.manipulateDom();
       }, (reason) => { });
+  }
+
+  onAddRating(brew_id: number) {
+    this.store.dispatch(BrewActions.selectOne({id: brew_id}));
+
+    this.modalService.open(NewRatingComponent).result.then((result: ICreateRating) => {
+      this.store.dispatch(RatingActions.create({item: result}));
+    }, (reason) => { });
+  }
+
+  onEditRating(brew_id: number, rating_id: number) {
+    this.store.dispatch(BrewActions.selectOne({id: brew_id}));
+    this.store.dispatch(RatingActions.selectOne({id: rating_id}));
+
+    this.modalService.open(EditRatingComponent).result.then((result: IRating) => {
+      this.store.dispatch(RatingActions.update({item: result}));
+      this.manipulateDom();
+    }, (reason) => { });
   }
 }

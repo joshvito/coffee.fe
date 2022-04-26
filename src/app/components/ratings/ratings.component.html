@@ -53,8 +53,6 @@
           <div class="collapse mt-3" id="collapse-{{i}}">
             <p class="card-text">
               Method: {{ (getMethod(b.method_id) | async)?.type }}<br/>
-              <!-- Flavor: {{ Flavor[b.flavor] | sentenceCase }}<br/> -->
-              <!-- Aroma: {{ Aroma[b.aroma] | sentenceCase }}<br/> -->
               Grams: {{ b.grams }}g <span *ngIf="b?.grind !== null">({{ (b.grind !== undefined && b.grind > -1 !== null ? Grind[b.grind] : 'Unknown') | sentenceCase}})</span>
             </p>
             <ng-container *ngIf="b.notes">
@@ -65,9 +63,17 @@
             </ng-container>
 
             <ng-container *ngIf="b.ratings">
-              <p class="mt-4">Ratings</p>
-              <div *ngFor="let r of b.ratings; let i = index" [class.mb-3]="b.ratings.length > 1 && i + 1 < b.ratings.length">
+              <div class="mt-4 mb-4 d-flex">
+                <div class="flex-grow-1">Ratings</div>
+                <div><button type="button" class="btn btn-coffee btn-sm" (click)="onAddRating(b.id)">
+                  <i class="fas fa-plus-circle"></i>
+                </button></div>
+              </div>
 
+              <div *ngFor="let r of b.ratings; let i = index" [class.mb-3]="b.ratings.length > 1 && i + 1 < b.ratings.length">
+                <button type="button" class="btn btn-coffee btn-sm" (click)="onEditRating(b.id, r.id)">
+                  <i class="far fa-edit fa-fw"></i>
+                </button>
                 <div class="d-flex align-items-center">
                   <div class="circle me-4">
                     <span class="initials">{{ r.user.name | userInitials}}</span>
@@ -103,6 +109,6 @@
 
   <div class="position-fixed bottom-0 end-0 h1 m-3 rounded-circle align-items-center justify-content-center d-flex shadow-lg"
     style="height: 55px; width: 55px; cursor: pointer; background: #fff">
-    <i class="fas fa-plus-circle d-block" (click)="onAddRating()"></i>
+    <i class="fas fa-plus-circle d-block" (click)="onAddBrew()"></i>
   </div>
 </div>

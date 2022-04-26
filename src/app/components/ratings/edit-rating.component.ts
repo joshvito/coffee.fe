@@ -2,25 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
-import { filter, Observable } from 'rxjs';
-import { ICoffeeBean, Roast } from 'src/app/models/bean.model';
-import { IBrewMethod } from 'src/app/models/brew-method.model';
-import { Grind } from 'src/app/models/brew.model';
+import { filter } from 'rxjs/operators';
 import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
 
 @Component({
   selector: 'app-edit-rating',
   templateUrl: 'rating-modal.html',
-  styles: [
-  ]
+  styles: []
 })
 export class EditRatingComponent implements OnInit {
   form: FormGroup;
-  Roast = Roast;
-  Grind = Grind;
-  methods$: Observable<IBrewMethod[]>;
-  beans$: Observable<ICoffeeBean[]>;
 
   constructor(
     private store: Store<State>,
@@ -28,22 +20,18 @@ export class EditRatingComponent implements OnInit {
     public activeModal: NgbActiveModal
   ) {
     this.form = fb.group({
-      'bean_id': fb.control(null, [Validators.required]),
-      'method_id': fb.control(null, [Validators.required]),
-      'flavor': fb.control(null, [Validators.required]),
-      'aroma': fb.control(null, [Validators.required]),
-      'grams': fb.control(null, [Validators.required]),
-      'grind': fb.control(null),
+      'brew_id': fb.control(null, [Validators.required]),
+      'aroma': fb.control(null, [Validators.required, Validators.max(5), Validators.min(1)]),
+      'flavor': fb.control(null, [Validators.required, Validators.max(5), Validators.min(1)]),
       'notes': fb.control('', [Validators.max(255)]),
-      'id': fb.control(null),
+      'id': fb.control(null, Validators.required),
     });
-    this.methods$ = this.store.select(selectors['brew-method'].getAllMethods);
-    this.beans$ = this.store.select(selectors['beans'].getAllBeans);
   }
 
   ngOnInit(): void {
     this.store.dispatch(BrewMethodActions.getMany());
     this.store.dispatch(CoffeeBeanActions.getMany({page: 1}));
+
     this.store.pipe(
       select(selectors['brew'].getSelectedRating),
       filter(r => !!r)

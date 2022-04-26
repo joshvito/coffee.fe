@@ -1,13 +1,14 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { IBrew, IFilterBrew } from 'src/app/models/brew.model';
-import { BrewActions } from '../actions';
+import { BrewActions, RatingActions } from '../actions';
 
 export const key = 'brew';
 
 export interface State extends EntityState<IBrew> {
   filters: IFilterBrew | null,
   selected: number | null,
+  selectedRating: number | null,
 };
 
 export function sortByCreatedAt(a: IBrew, b: IBrew): number {
@@ -22,6 +23,7 @@ export const adapter: EntityAdapter<IBrew> = createEntityAdapter<IBrew>({
 const initialState: State = adapter.getInitialState({
   filters: null,
   selected: null,
+  selectedRating: null,
 });
 
 export const reducer = createReducer(
@@ -51,7 +53,15 @@ export const reducer = createReducer(
     (state, { id }) => {
       return {...state, selected: id}
     },
+  ),
+
+  on(
+    RatingActions.selectOne,
+    (state, { id }) => {
+      return {...state, selectedRating: id}
+    },
   )
 );
 
 export const getSelectedId = (s: State) => s.selected;
+export const getSelectedRatingId = (s: State) => s.selectedRating;
