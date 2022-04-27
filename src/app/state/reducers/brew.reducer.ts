@@ -60,6 +60,16 @@ export const reducer = createReducer(
     (state, { id }) => {
       return {...state, selectedRating: id}
     },
+  ),
+
+  on(
+    RatingActions.createSuccess, RatingActions.updateSuccess,
+    (state, {item}) => {
+      const _brew: IBrew = {...state.entities[item.brew_id]} as unknown as IBrew;
+      const _rating = (_brew.ratings || []).filter(r => r.id !== item.id);
+      _brew.ratings =  [..._rating, item];
+      return adapter.upsertOne(_brew, state)
+    }
   )
 );
 
