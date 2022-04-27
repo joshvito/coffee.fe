@@ -76,7 +76,7 @@
                 </button>
                 <div class="d-flex align-items-center">
                   <div class="circle me-4">
-                    <span class="initials">{{ r.user.name | userInitials}}</span>
+                    <span class="initials">{{ r?.user?.name | userInitials}}</span>
                   </div>
                   <div class="flex-grow-1">
                     <div class="fs-8">{{ r.created_at | date:"MMM d, y" }}</div>
