@@ -23,7 +23,7 @@ export class NewRatingComponent implements OnInit {
     const optionalFields = this.optionalKeys.reduce((accum, key) => {
       return {
         ...accum,
-        [key]: fb.control(0, [Validators.max(5), Validators.min(1)])
+        [key]: fb.control(null, [Validators.max(5), Validators.min(1)])
       };
     }, {});
 
