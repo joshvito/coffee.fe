@@ -13,7 +13,8 @@ export class ColorizerService {
   }
 
   private calculatorize(rating: IRating): number {
-    return 0 + rating.aroma + rating.flavor;
+    // TODO: this needs revisit or removed - jv
+    return 0; // + rating.aroma + rating.flavor;
   }
 // yellow
   private colorize(score: number): string {

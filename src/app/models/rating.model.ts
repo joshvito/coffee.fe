@@ -7,9 +7,18 @@ export interface IRating extends ITimestamps, ICreateRating {
     user: IUser;
 }
 
-export interface ICreateRating {
+export interface ICreateRating extends Partial<IRatingOptionals> {
     brew_id: number;
-    flavor: number;
-    aroma: number;
+    rating: number;
     notes: string;
 }
+
+export interface IRatingOptionals {
+  sweetness: number;
+  aroma: number;
+  body: number;
+  acidity: number;
+  aftertaste: number;
+}
+
+export const OptionalRatingKeys = ['aroma','body','acidity','sweetness','aftertaste'];

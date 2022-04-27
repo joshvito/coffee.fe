@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
-import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
+import { OptionalRatingKeys } from 'src/app/models/rating.model';
 import { selectors, State } from 'src/app/state/reducers';
 
 @Component({
@@ -13,18 +13,26 @@ import { selectors, State } from 'src/app/state/reducers';
 })
 export class EditRatingComponent implements OnInit {
   form: FormGroup;
+  optionalKeys = OptionalRatingKeys;
 
   constructor(
     private store: Store<State>,
     fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
+    const optionalFields = this.optionalKeys.reduce((accum, key) => {
+      return {
+        ...accum,
+        [key]: fb.control(0, [Validators.max(5), Validators.min(1)])
+      };
+    }, {});
+
     this.form = fb.group({
       'brew_id': fb.control(null, [Validators.required]),
-      'aroma': fb.control(null, [Validators.required, Validators.max(5), Validators.min(1)]),
-      'flavor': fb.control(null, [Validators.required, Validators.max(5), Validators.min(1)]),
+      'rating': fb.control(null, [Validators.required, Validators.max(5), Validators.min(1)]),
       'notes': fb.control('', [Validators.max(255)]),
       'id': fb.control(null, Validators.required),
+      ...optionalFields
     });
   }
 
