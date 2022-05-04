@@ -54,11 +54,6 @@ export class RatingsComponent implements OnInit {
     }, (reason) => { });
   }
 
-  getColor(brew: IBrew): string {
-    // TODO: this is probs broken
-    return this.colorizer.color(brew.ratings[0]);
-  }
-
   getBean(id: number): Observable<ICoffeeBean | undefined> {
     return this.store.select(selectors['beans'].getBeanById(id));
   }
@@ -131,5 +126,13 @@ export class RatingsComponent implements OnInit {
       this.store.dispatch(RatingActions.update({item: result}));
       this.manipulateDom();
     }, (reason) => { });
+  }
+
+  getAvgRating(brew: IBrew): number {
+    if (brew?.ratings?.length) {
+      const total = brew.ratings.reduce((t, rating) => t+=rating.rating, 0);
+      return total/brew.ratings.length;
+    }
+    return 0;
   }
 }

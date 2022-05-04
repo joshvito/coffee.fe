@@ -22,11 +22,6 @@
         <div class="card-body">
           <div class="card-title mb-0">
 
-            <!-- <span [ngStyle]="{'background-color': getColor(r), '--bs-bg-opacity': 1}"
-              class="position-absolute top-50 end-0 translate-middle p-2 border border-light rounded-circle">
-              <span class="visually-hidden">color dot</span>
-            </span> -->
-
             <a class="d-block link-dark p-0 text-decoration-none" data-bs-toggle="collapse" href="#collapse-{{i}}">
               <ng-container *ngIf="getBean(b.bean_id) | async as bean">
                 <div class="d-flex align-items-center">
@@ -38,11 +33,7 @@
                   <div class="d-flex flex-column align-items-end">
                     <span class="badge bg-dark fs-7">{{ getRoast(bean.roast) }} Roast</span>
                     <div>
-                      <i class="fa fa-solid fa-star fs-7" aria-hidden="true"></i>
-                      <i class="fa fa-solid fa-star fs-7" aria-hidden="true"></i>
-                      <i class="fa fa-solid fa-star fs-7" aria-hidden="true"></i>
-                      <i class="fa fa-solid fa-star fs-7" aria-hidden="true"></i>
-                      <i class="fa fa-solid fa-star fs-7" aria-hidden="true"></i>
+                      <app-stars [rating]="getAvgRating(b)"></app-stars>
                     </div>
                   </div>
                 </div>
