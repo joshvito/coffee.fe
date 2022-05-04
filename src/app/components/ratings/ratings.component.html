@@ -79,22 +79,22 @@
                   <div class="flex-grow-1">
                     <div class="fs-8">{{ r.created_at | date:"MMM d, y" }}</div>
                     <div class="d-flex">
-                      <div>Rating:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
+                      <div>Rating:</div> <app-stars [rating]="2.63"></app-stars>
                     </div>
                     <div class="d-flex">
-                      <div>Aroma:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
+                      <div>Aroma:</div> <app-stars [rating]="2.63"></app-stars>
                     </div>
                     <div class="d-flex">
-                      <div>Body:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
+                      <div>Body:</div> <app-stars [rating]="2.63"></app-stars>
                     </div>
                     <div class="d-flex">
-                      <div>Acidity:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
+                      <div>Acidity:</div> <app-stars [rating]="2.63"></app-stars>
                     </div>
                     <div class="d-flex">
-                      <div>Sweetness:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
+                      <div>Sweetness:</div> <app-stars [rating]="2.63"></app-stars>
                     </div>
                     <div class="d-flex">
-                      <div>Aftertaste:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
+                      <div>Aftertaste:</div> <app-stars  [rating]="2.63"></app-stars>
                     </div>
                     <ng-container *ngIf="r.notes">
                       <p class="bg-light p-2 mb-0 me-3 rounded shadow-sm">
