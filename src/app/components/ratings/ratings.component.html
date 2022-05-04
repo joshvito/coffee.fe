@@ -79,19 +79,19 @@
                   <div class="flex-grow-1">
                     <div class="fs-8">{{ r.created_at | date:"MMM d, y" }}</div>
                     <div class="d-flex">
-                      <div>Rating:</div> <app-stars></app-stars>
+                      <div>Rating:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
                     </div>
                     <div class="d-flex">
-                      <div>Aroma:</div> <app-stars></app-stars>
+                      <div>Aroma:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
                     </div>
                     <div class="d-flex">
-                      <div>Body:</div> <app-stars></app-stars>
+                      <div>Body:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
                     </div>
                     <div class="d-flex">
-                      <div>Acidity:</div> <app-stars></app-stars>
+                      <div>Acidity:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
                     </div>
                     <div class="d-flex">
-                      <div>Sweetness:</div> <app-stars></app-stars>
+                      <div>Sweetness:</div> <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
                     </div>
                     <div class="d-flex">
                       <div>Aftertaste:</div> <app-stars></app-stars>

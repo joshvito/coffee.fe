@@ -29,6 +29,7 @@ import { UserInitialsPipe } from './pipes/user-initials.pipe';
 import { NewRatingComponent } from './components/ratings/new-rating.component';
 import { EditRatingComponent } from './components/ratings/edit-rating.component';
 import { StarsComponent } from './components/stars/stars.component';
+import { StarRatingModule } from 'angular-star-rating';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -67,7 +68,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     StoreModule.forRoot(fromRoot.reducers, {metaReducers: fromRoot.metaReducers}),
     EffectsModule.forRoot([...effects]),
     NgbModule,
-    HammerModule
+    HammerModule,
+    StarRatingModule.forRoot()
   ],
   providers: [
     httpInterceptorProviders,
