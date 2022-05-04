@@ -13,7 +13,7 @@ import { Component, OnInit, Input } from '@angular/core';
       color: red;
     }
     .filled {
-      color: brown;
+      color: lightgray;
     }
   `]
 })

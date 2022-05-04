@@ -78,24 +78,44 @@
                   </div>
                   <div class="flex-grow-1">
                     <div class="fs-8">{{ r.created_at | date:"MMM d, y" }}</div>
-                    <div class="d-flex">
-                      <div>Rating:</div> <app-stars [rating]="2.63"></app-stars>
-                    </div>
-                    <div class="d-flex">
-                      <div>Aroma:</div> <app-stars [rating]="2.63"></app-stars>
-                    </div>
-                    <div class="d-flex">
-                      <div>Body:</div> <app-stars [rating]="2.63"></app-stars>
-                    </div>
-                    <div class="d-flex">
-                      <div>Acidity:</div> <app-stars [rating]="2.63"></app-stars>
-                    </div>
-                    <div class="d-flex">
-                      <div>Sweetness:</div> <app-stars [rating]="2.63"></app-stars>
-                    </div>
-                    <div class="d-flex">
-                      <div>Aftertaste:</div> <app-stars  [rating]="2.63"></app-stars>
-                    </div>
+                    <table>
+                      <tr>
+                        <td>Rating:</td>
+                        <td>
+                          <app-stars [rating]="r.rating"></app-stars>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Aroma:</td>
+                        <td>
+                          <app-stars [rating]="r.aroma"></app-stars>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Body:</td>
+                        <td>
+                          <app-stars [rating]="r.body"></app-stars>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Acidity:</td>
+                        <td>
+                          <app-stars [rating]="r.acidity"></app-stars>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Sweetness:</td>
+                        <td>
+                          <app-stars [rating]="r.sweetness"></app-stars>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Aftertaste:</td>
+                        <td>
+                          <app-stars [rating]="r.aftertaste"></app-stars>
+                        </td>
+                      </tr>
+                    </table>
                     <ng-container *ngIf="r.notes">
                       <p class="bg-light p-2 mb-0 me-3 rounded shadow-sm">
                         Notes:<br/>
