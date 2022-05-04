@@ -78,14 +78,24 @@
                   </div>
                   <div class="flex-grow-1">
                     <div class="fs-8">{{ r.created_at | date:"MMM d, y" }}</div>
-                    <div>
-                      Rating: <app-stars></app-stars>
-                      <br>Aroma: <app-stars></app-stars>
-                      <br>Body: <app-stars></app-stars>
-                      <br>Acidity: <app-stars></app-stars>
-                      <br>Sweetness: <app-stars></app-stars>
-                      <br>Aftertaste: <app-stars></app-stars>
+                    <div class="d-flex">
+                      <p>Rating:</p> <app-stars></app-stars>
                     </div>
+                    <div class="d-flex">
+                      <p>Aroma:</p> <app-stars></app-stars>
+                    </div>
+                    <div class="d-flex">
+                      <p>Body:</p> <app-stars></app-stars>
+                    </div>
+                    <div class="d-flex">
+                      <p>Acidity:</p> <app-stars></app-stars>
+                    </div>
+                    <div class="d-flex">
+                      <p>Sweetness:</p> <app-stars></app-stars>
+                    </div>
+                    <div class="d-flex">
+                      <p>Aftertaste:</p> <app-stars></app-stars>
+                    <div>
                     <ng-container *ngIf="r.notes">
                       <p class="bg-light p-2 mb-0 me-3 rounded shadow-sm">
                         Notes:<br/>
@@ -93,7 +103,7 @@
                       </p>
                     </ng-container>
                   </div>
-                  <div class="d-flex align-items-end">
+                  <div>
                     <button type="button" class="btn btn-coffee btn-sm" (click)="onEditRating(b.id, r.id)">
                       <i class="fas fa-ellipsis-v fa-fw"></i>
                     </button>
