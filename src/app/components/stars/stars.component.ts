@@ -18,7 +18,7 @@ import { Component, OnInit, Input } from '@angular/core';
   `]
 })
 export class StarsComponent implements OnInit {
-  @Input() rating = 0;
+  @Input() rating: number | undefined = 0;
 
   maxStars = 5;
   numFilledStars: number[] | null = null;
@@ -27,7 +27,8 @@ export class StarsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const r = this.rating > this.maxStars ? this.maxStars : Math.ceil(this.rating);
+    const rating = this.rating ?? 0;
+    const r = rating > this.maxStars ? this.maxStars : Math.ceil(rating);
 
     this.numFilledStars = Array(r).fill(null).map((x,i) => i);
     this.numUnFilledStars = Array(this.maxStars - r).fill(null).map((x,i) => i);
