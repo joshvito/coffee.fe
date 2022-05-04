@@ -10,10 +10,10 @@ import { Component, OnInit, Input } from '@angular/core';
   `,
   styles: [`
     .unfilled {
-      color: red;
+      color: lightgray;
     }
     .filled {
-      color: lightgray;
+      color: brown;
     }
   `]
 })
