@@ -115,7 +115,10 @@
                     </ng-container>
                   </div>
                   <div>
-                    <button type="button" class="btn btn-coffee btn-sm" (click)="onEditRating(b.id, r.id)">
+                    <button type="button"
+                      *ngIf="r.user_id === (currentUser$ | async)?.id"
+                      class="btn btn-coffee btn-sm"
+                      (click)="onEditRating(b.id, r.id)">
                       <i class="fas fa-ellipsis-v fa-fw"></i>
                     </button>
                   </div>
