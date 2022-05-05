@@ -117,7 +117,7 @@
                   <div>
                     <button type="button"
                       *ngIf="r.user_id === (currentUser$ | async)?.id"
-                      class="btn btn-coffee btn-sm"
+                      class="btn btn-coffee btn-sm p-1"
                       (click)="onEditRating(b.id, r.id)">
                       <i class="fas fa-ellipsis-v fa-fw"></i>
                     </button>
