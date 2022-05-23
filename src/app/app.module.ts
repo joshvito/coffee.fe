@@ -29,6 +29,7 @@ import { UserInitialsPipe } from './pipes/user-initials.pipe';
 import { NewRatingComponent } from './components/ratings/new-rating.component';
 import { EditRatingComponent } from './components/ratings/edit-rating.component';
 import { StarsComponent } from './components/stars/stars.component';
+import { StarsInputComponent } from './components/stars-input/stars-input.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -58,6 +59,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NewRatingComponent,
     EditRatingComponent,
     StarsComponent,
+    StarsInputComponent,
   ],
   imports: [
     ReactiveFormsModule,

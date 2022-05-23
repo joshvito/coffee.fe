@@ -1,8 +1,9 @@
 <form [formGroup]="form" class="m-4" (ngSubmit)="onSave()">
   <div class="mb-3">
     <label for="rating" class="form-label">Rating *</label>
-    <input id="rating" class="form-control" formControlName="rating" type="number" min="0" max="5"
-      [class.is-invalid]="form.get('rating')?.invalid && form.get('rating')?.touched" />
+    <app-stars-input formControlName="rating"></app-stars-input>
+    <!-- <input id="rating" class="form-control" formControlName="rating" type="number" min="0" max="5"
+      [class.is-invalid]="form.get('rating')?.invalid && form.get('rating')?.touched" /> -->
   </div>
 
   <div class="mb-3" *ngFor="let key of optionalKeys">
