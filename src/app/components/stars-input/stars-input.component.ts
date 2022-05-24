@@ -12,7 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         <i class="fa fa-solid fa-star fs-7 filled" [class.pe-1]="i+1 > stars.length"></i>
       </ng-container>
       <ng-template #noStar>
-        <i class="fa fa-solid fa-star fs-7 unfilled [class.pe-1]="i+1 > stars.length"></i>
+        <i class="fa fa-solid fa-star fs-7 unfilled" [class.pe-1]="i+1 > stars.length"></i>
       </ng-template>
     </span>
   `,
