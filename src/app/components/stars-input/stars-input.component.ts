@@ -7,12 +7,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     <span
       *ngFor="let starred of stars; let i = index"
       (click)="onTouched(); rate(i + (starred ? (value > i + 1 ? 1 : 0) : 1))"
+      title="{{ i }}"
     >
       <ng-container *ngIf="starred; else noStar">
-        <i class="fa fa-solid fa-star fs-7 filled" [class.pe-1]="i+1 < stars.length"></i>
+        <i class="fa fa-solid fa-star fs-5 filled" [class.pe-1]="i+1 < stars.length"></i>
       </ng-container>
       <ng-template #noStar>
-        <i class="fa fa-solid fa-star fs-7 unfilled" [class.pe-1]="i+1 < stars.length"></i>
+        <i class="fa fa-solid fa-star fs-5 unfilled" [class.pe-1]="i+1 < stars.length"></i>
       </ng-template>
     </span>
   `,
