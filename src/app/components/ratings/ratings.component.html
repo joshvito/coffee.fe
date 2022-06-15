@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <p *ngIf="!(brews$| async)?.length">No Ratings</p>
+  <p *ngIf="!(brews$| async)?.length">No Brews</p>
 
   <div class="row gy-3">
     <div class="col-12" *ngFor="let b of (brews$| async); let i = index" #brew>
@@ -53,15 +53,15 @@
               </p>
             </ng-container>
 
-            <ng-container *ngIf="b.ratings">
-              <hr/>
-              <div class="mb-4 d-flex">
-                <div class="flex-grow-1">Ratings</div>
-                <div><button type="button" class="btn btn-coffee btn-sm" (click)="onAddRating(b.id)">
-                  <i class="fas fa-plus-circle"></i>
-                </button></div>
-              </div>
+            <hr/>
+            <div class="mb-4 d-flex">
+              <div class="flex-grow-1">Ratings</div>
+              <div><button type="button" class="btn btn-coffee btn-sm" (click)="onAddRating(b.id)">
+                <i class="fas fa-plus-circle"></i>
+              </button></div>
+            </div>
 
+            <ng-container *ngIf="b.ratings; else noRatings">
               <div class="card" *ngFor="let r of b.ratings; let i = index" [class.mb-3]="b.ratings.length > 1 && i + 1 < b.ratings.length">
                 <div class="d-flex align-items-top card-body">
                   <div class="circle me-4">
@@ -126,6 +126,9 @@
               </div>
             </ng-container>
 
+            <ng-template #noRatings>
+              <div class="card"><div class="d-flex align-items-top card-body">No Ratings.</div></div>
+            </ng-template>
           </div>
         </div>
       </div>
