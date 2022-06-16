@@ -61,7 +61,7 @@
               </button></div>
             </div>
 
-            <ng-container *ngIf="b.ratings; else noRatings">
+            <ng-container *ngIf="b.ratings != null && b.ratings.length > 0; else noRatings">
               <div class="card" *ngFor="let r of b.ratings; let i = index" [class.mb-3]="b.ratings.length > 1 && i + 1 < b.ratings.length">
                 <div class="d-flex align-items-top card-body">
                   <div class="circle me-4">
@@ -125,7 +125,6 @@
                 </div>
               </div>
             </ng-container>
-
             <ng-template #noRatings>
               <div class="card"><div class="d-flex align-items-top card-body">No Ratings.</div></div>
             </ng-template>
