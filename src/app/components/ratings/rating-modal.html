@@ -2,15 +2,18 @@
   <div class="mb-3">
     <label for="rating" class="form-label">Rating *</label>
     <div><app-stars-input formControlName="rating"></app-stars-input></div>
-    <!-- <input id="rating" class="form-control" formControlName="rating" type="number" min="0" max="5"
-      [class.is-invalid]="form.get('rating')?.invalid && form.get('rating')?.touched" /> -->
   </div>
 
   <div class="mb-3" *ngFor="let key of optionalKeys">
+    <button type="button"
+      class="btn btn-outline-secondary me-2"
+      placement="end"
+      [ngbPopover]="optionalDescriptions[key]" [popoverTitle]="key">
+        <i class="ms-2 fa fa-solid fa-info-circle" aria-hidden="true"></i>
+        <span class="visually-hidden">info icon</span>
+    </button>
     <label [attr.for]="key" class="form-label">{{key | titlecase}}</label>
     <div><app-stars-input [formControlName]="key"></app-stars-input></div>
-    <!-- <input [id]="key" class="form-control" [formControlName]="key" type="number" min="0" max="5"
-      [class.is-invalid]="form.get(key)?.invalid && form.get(key)?.touched" /> -->
   </div>
 
   <div class="mb-3">

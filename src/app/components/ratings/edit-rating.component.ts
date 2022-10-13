@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
-import { OptionalRatingKeys } from 'src/app/models/rating.model';
+import { OptionalRatingDescriptions, OptionalRatingKeys } from 'src/app/models/rating.model';
 import { selectors, State } from 'src/app/state/reducers';
 
 @Component({
@@ -14,6 +14,7 @@ import { selectors, State } from 'src/app/state/reducers';
 export class EditRatingComponent implements OnInit {
   form: FormGroup;
   optionalKeys = OptionalRatingKeys;
+  optionalDescriptions = OptionalRatingDescriptions;
 
   constructor(
     private store: Store<State>,
