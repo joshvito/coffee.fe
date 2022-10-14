@@ -5,14 +5,16 @@
   </div>
 
   <div class="mb-3" *ngFor="let key of optionalKeys">
+    <label [attr.for]="key" class="form-label">{{key | titlecase}}</label>
+
     <button type="button"
-      class="btn btn-outline-secondary me-2"
+      class="btn btn-sm"
       placement="end"
       [ngbPopover]="optionalDescriptions[key]" [popoverTitle]="key">
         <i class="ms-2 fa fa-solid fa-info-circle" aria-hidden="true"></i>
         <span class="visually-hidden">info icon</span>
     </button>
-    <label [attr.for]="key" class="form-label">{{key | titlecase}}</label>
+
     <div><app-stars-input [formControlName]="key"></app-stars-input></div>
   </div>
 
