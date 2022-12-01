@@ -4,7 +4,7 @@
     <select id="bean_id" class="form-control" formControlName="bean_id"
       [class.is-invalid]="form.get('bean_id')?.invalid && form.get('bean_id')?.touched">
       <option></option>
-      <option [title]="getTitle(bean)" *ngFor="let bean of (beans$ | async)" [ngValue]="bean.id">{{getTitle(bean)}}</option>
+      <option [title]="getTitle(bean)" *ngFor="let bean of (beans$ | async)" [ngValue]="bean.id">{{getLabel(bean)}}</option>
     </select>
   </div>
   <div class="mb-3">
