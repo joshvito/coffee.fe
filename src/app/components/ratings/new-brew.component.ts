@@ -8,6 +8,7 @@ import { IBrewMethod } from 'src/app/models/brew-method.model';
 import { Grind } from 'src/app/models/brew.model';
 import { BrewMethodActions, CoffeeBeanActions } from 'src/app/state/actions';
 import { selectors, State } from 'src/app/state/reducers';
+import { BaseBrewComponent } from './base-brew.component';
 
 @Component({
   selector: 'app-new-brew',
@@ -15,7 +16,7 @@ import { selectors, State } from 'src/app/state/reducers';
   styles: [
   ]
 })
-export class NewBrewComponent implements OnInit {
+export class NewBrewComponent extends BaseBrewComponent implements OnInit {
   form: FormGroup;
   Roast = Roast;
   Grind = Grind;
@@ -27,6 +28,7 @@ export class NewBrewComponent implements OnInit {
     fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
+    super();
     this.form = fb.group({
       'bean_id': fb.control(null, [Validators.required]),
       'method_id': fb.control(null, [Validators.required]),
@@ -50,5 +52,4 @@ export class NewBrewComponent implements OnInit {
   onClose(): void {
     this.activeModal.dismiss();
   }
-
 }
