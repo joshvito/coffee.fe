@@ -18,7 +18,7 @@
     "@angular/platform-browser": "^15.0.2",
     "@angular/platform-browser-dynamic": "^15.0.2",
     "@angular/router": "^15.0.2",
-    "@ng-bootstrap/ng-bootstrap": "^13.1.1",
+    "@ng-bootstrap/ng-bootstrap": "^14.0.0-rc.1",
     "@ngrx/effects": "^15.0.0",
     "@ngrx/entity": "^15.0.0",
     "@ngrx/store": "^15.0.0",
