@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { filter, Observable } from 'rxjs';
@@ -17,7 +17,7 @@ import { BaseBrewComponent } from './base-brew.component';
   ]
 })
 export class EditBrewComponent extends BaseBrewComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   Roast = Roast;
   Grind = Grind;
   methods$: Observable<IBrewMethod[]>;
@@ -25,7 +25,7 @@ export class EditBrewComponent extends BaseBrewComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
-    fb: FormBuilder,
+    fb: UntypedFormBuilder,
     public activeModal: NgbActiveModal
   ) {
     super();

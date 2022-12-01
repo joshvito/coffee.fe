@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, tap } from 'rxjs';
@@ -45,13 +45,13 @@ import { selectors, State } from 'src/app/state/reducers';
 export class RatingFilterComponent implements OnInit {
   methods$: Observable<IBrewMethod[]>;
   beans$: Observable<ICoffeeBean[]>;
-  form: FormGroup;
+  form: UntypedFormGroup;
   Roast = Roast;
 
   constructor(
     public activeModal: NgbActiveModal,
     private store: Store<State>,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.methods$ = this.store.select(selectors['brew-method'].getAllMethods);
     this.beans$ = this.store.select(selectors['beans'].getAllBeans);
@@ -79,11 +79,11 @@ export class RatingFilterComponent implements OnInit {
   }
 
   get beans() {
-    return this.form.get('beans') as FormGroup
+    return this.form.get('beans') as UntypedFormGroup
   }
 
   get methods() {
-    return this.form.get('methods') as FormGroup
+    return this.form.get('methods') as UntypedFormGroup
   }
 
   onSubmit(): void {

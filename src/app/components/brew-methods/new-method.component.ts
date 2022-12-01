@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -40,10 +40,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   ]
 })
 export class NewMethodComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(
-    fb: FormBuilder,
+    fb: UntypedFormBuilder,
     public activeModal: NgbActiveModal
   ) {
     this.form = fb.group({

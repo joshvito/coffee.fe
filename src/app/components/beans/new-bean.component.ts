@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Roast } from 'src/app/models/bean.model';
+
+interface IForm {
+  brand: FormControl<string|null>,
+  origin: FormControl<string|null>,
+  roast: FormControl<string|null>,
+  notes: FormControl<string|null>
+}
 
 @Component({
   selector: 'app-new-bean',
@@ -44,14 +51,14 @@ import { Roast } from 'src/app/models/bean.model';
   ]
 })
 export class NewBeanComponent implements OnInit {
-  form: FormGroup;
+  form: FormGroup<IForm>;
   Roast = Roast;
 
   constructor(
     fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
-    this.form = fb.group({
+    this.form = fb.group<IForm>({
       'brand': fb.control(null, [Validators.required]),
       'origin': fb.control(null, [Validators.required]),
       'roast': fb.control(null, [Validators.required]),
