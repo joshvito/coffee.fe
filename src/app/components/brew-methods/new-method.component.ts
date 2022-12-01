@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+interface IForm {
+  type: FormControl<string|null>,
+  volume: FormControl<string|null>,
+  units: FormControl<string|null>,
+  notes: FormControl<string|null>
+}
 
 @Component({
   selector: 'app-new-method',
@@ -40,13 +47,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   ]
 })
 export class NewMethodComponent implements OnInit {
-  form: UntypedFormGroup;
+  form: FormGroup<IForm>;
 
   constructor(
-    fb: UntypedFormBuilder,
+    fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
-    this.form = fb.group({
+    this.form = fb.group<IForm>({
       'type': fb.control(null, [Validators.required]),
       'volume': fb.control(null, [Validators.required]),
       'units': fb.control(null, [Validators.required]),
