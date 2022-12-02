@@ -1,5 +1,4 @@
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
-import { IStringStringMap, ITimestamps } from './common.model';
+import { ITimestamps } from './common.model';
 import { IUser } from './user.model';
 
 export interface IRating extends ITimestamps, ICreateRating {
