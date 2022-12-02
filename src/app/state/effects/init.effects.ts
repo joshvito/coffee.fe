@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ofType, Actions, Effect, ROOT_EFFECTS_INIT, createEffect } from '@ngrx/effects';
-import { mergeMap, tap } from 'rxjs';
+import { ofType, Actions, ROOT_EFFECTS_INIT, createEffect } from '@ngrx/effects';
+import { mergeMap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 @Injectable()
