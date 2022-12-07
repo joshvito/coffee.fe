@@ -43,18 +43,26 @@ export class NewRatingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges
-      .subscribe((fv) => {
-        const ratingTotal = Object.keys(fv).reduce((accum, k) => {
-          if(k === 'rating' || k === 'notes') return accum;
-          return accum += parseInt(fv[k]);
-        },0);
+    const calcRating = () => {
+      let count = 0;
+      const ratingTotal = OptionalRatingKeys.reduce((accum, k) => {
+        const fv = this.form.get(k)?.value;
+        const tmp = fv == null ? 0 : parseInt(fv);
+        count += (tmp > 0) ? 1 : 0
+        return accum += tmp;
+      }, 0);
 
-        const rating = ratingTotal/OptionalRatingKeys.length;
+      return count > 0 ? Math.ceil(ratingTotal/count) : 0;
+    };
 
-        this.form.patchValue({rating});
-      });
-
+    OptionalRatingKeys.map(k => {
+      this.form.get(k)?.valueChanges
+        .pipe(filter(v => !!v))
+        .subscribe(v => {
+          const rating = calcRating();
+          this.form.get('rating')?.setValue(rating);
+        });
+    });
 
     this.store.pipe(
       select(selectors['brew'].getSelectedBrew),

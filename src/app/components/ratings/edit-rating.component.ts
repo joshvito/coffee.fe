@@ -38,6 +38,27 @@ export class EditRatingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const calcRating = () => {
+      let count = 0;
+      const ratingTotal = OptionalRatingKeys.reduce((accum, k) => {
+        const fv = this.form.get(k)?.value;
+        const tmp = fv == null ? 0 : parseInt(fv);
+        count += (tmp > 0) ? 1 : 0
+        return accum += tmp;
+      }, 0);
+
+      return count > 0 ? Math.ceil(ratingTotal/count) : 0;
+    };
+
+    OptionalRatingKeys.map(k => {
+      this.form.get(k)?.valueChanges
+        .pipe(filter(v => !!v))
+        .subscribe(v => {
+          const rating = calcRating();
+          this.form.get('rating')?.setValue(rating);
+        });
+    });
+
     this.store.pipe(
       select(selectors['brew'].getSelectedRating),
       filter(r => !!r)
