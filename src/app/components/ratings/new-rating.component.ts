@@ -10,7 +10,7 @@ import { selectors, State } from 'src/app/state/reducers';
 
 type formKeys = 'brew_id' | 'rating' | 'notes' | optionalRatingKeysType;
 type IForm = {
-  [key in formKeys]: FormControl<string|null>
+  [key in formKeys]: string|null
 }
 @Component({
   selector: 'app-new-rating',
@@ -45,11 +45,14 @@ export class NewRatingComponent implements OnInit {
   ngOnInit(): void {
     this.form.valueChanges
       .subscribe((fv) => {
-        console.log(fv);
-        // sum with other optionalField values that are not me
-        // parseInt their values
-        // divide by length of optionalFields
-        // set rating value to division answer.
+        const ratingTotal = Object.keys(fv).reduce((accum, k) => {
+          if(k === 'rating' || k === 'notes') return accum;
+          return accum += parseInt(fv[k]);
+        },0);
+
+        const rating = ratingTotal/OptionalRatingKeys.length;
+
+        this.form.patchValue({rating});
       });
 
 
